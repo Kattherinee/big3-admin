@@ -1,0 +1,74 @@
+
+.button{
+	
+	justify-content: center;
+	align-items: center;
+	padding: 8px 24px;
+	cursor: pointer;
+	
+	margin: 10px;
+
+	display: flex;
+	flex-direction: row;
+	border-radius: 4px;
+
+	font-family: 'Avenir-Medium';
+	font-size: 15px;
+	font-weight: 500;
+	
+}
+
+.signIn{
+	width: 365px;
+	height: 40px;
+	background: var(--red-default);
+	border: none;
+	color: var(--white);
+}
+
+.add{
+		width: 104px;
+		height: 40px;
+		background: var(--red-default);
+		border: none;
+		color: var(--white);
+}
+.cancel{
+	box-sizing: border-box;
+	background: var(--white);
+		width: 171px;
+		height: 40px;
+		border: 1px solid var(--light-grey) ;
+	
+		color: var(--light-grey);
+}
+
+.button:hover {
+	background: var(--light-red);
+
+}
+
+.button:active {
+	background: var(--dark-red);
+}
+
+.cancel:hover{
+	background: var(--lightest-grey);
+}
+.cancel:active{
+		border: 1px solid var(--grey);
+		background: var(--light-grey);
+	
+		color: var(--grey);
+}
+
+
+.button:disabled {
+	background: var(--lightest-grey1);
+	color: var(--lightest-grey);
+	cursor: not-allowed;
+}
+ .cancel:disabled {
+	border: 1px solid var(--light-grey);
+
+} 
