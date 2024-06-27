@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { TeamsPage } from "./pages/teams/TeamsPage";
 import { PlayersPage } from "./pages/players/PlayersPage";
-import { MainLayout } from "./pages/layout/MainLayout.tsx";
+import { MainLayout } from "./pages/layout/MainLayout/MainLayout.tsx";
 
 const router = createBrowserRouter([
   //добавляем пути к страничкам
@@ -15,14 +15,14 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: "/",
+        path: "/teams",
         element: <TeamsPage />,
       },
+      {
+        path: "/players",
+        element: <PlayersPage />,
+      },
     ],
-  },
-  {
-    path: "/players",
-    element: <PlayersPage />,
   },
 ]);
 

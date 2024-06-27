@@ -36,4 +36,12 @@ body{
     font-size: 14px;
     font-weight: 500;
     line-height: 24px;
+    background: var(--lightest-grey1);
 }
+/* html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+} */

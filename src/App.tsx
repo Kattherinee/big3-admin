@@ -6,7 +6,6 @@ function App() {
   return (
     <>
       <Button appearence="sign">Sign In </Button>
-      <InputField label="Login" required />
     </>
   );
 }
