@@ -1,13 +1,8 @@
 import "./index.css";
-import Button from "./components/Button/Button";
-import InputField from "./components/Input/Input";
+// import Button from "./components/Button/Button";
 
 function App() {
-  return (
-    <>
-      <Button appearence="sign">Sign In </Button>
-    </>
-  );
+  return <></>;
 }
 
 export default App;

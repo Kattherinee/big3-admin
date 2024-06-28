@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { TeamsPage } from "./pages/teams/TeamsPage";
 import { PlayersPage } from "./pages/players/PlayersPage";
 import { MainLayout } from "./pages/layout/MainLayout/MainLayout.tsx";
+import { AuthLayout } from "./pages/layout/AuthLayout.tsx";
 
 const router = createBrowserRouter([
   //добавляем пути к страничкам
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         element: <PlayersPage />,
       },
     ],
+  },
+  {
+    path: "/logIn",
+    element: <AuthLayout />,
   },
 ]);
 

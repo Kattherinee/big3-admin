@@ -1,36 +1,166 @@
-.header{
+.header {
 	height: 80px;
 	display: flex;
 	justify-content: space-between;
-	align-items: center; 
-
-		position: fixed;
-		left: 0%;
-		right: 0%;
-		top: 0%;
-		bottom: 0%;
-
-		background: var(--white);
-		box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
+	align-items: center;
+	position: relative;
+	background: var(--white);
+	box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
+	z-index: 100;
 }
 
-.logo{
+.logo {
 
-width: 191px;
-height: 48px;
-padding-left: 51px;
+	padding-left: 51px;
+}
 
-}
-.user{
-	padding-right: 51px;
-	display: flex;
-		align-items: center;
-}
 .user img{
 	width: 36px;
 	height: 36px;
 }
 .user span{
+	margin-top: 4px;
 	margin-right: 16px;
-	padding-top: 4px;
 }
+.user {
+	display:flex;
+	align-items: center;
+	margin-right: 51px;
+}
+
+.hamburger {
+	display: none;
+}
+
+.sidebar {
+
+	position: fixed;
+	height: calc(100% - 80px);
+	top: 80px;
+	display: flex;
+		flex-direction: column;
+		align-items: center;
+	width: 140px;
+	background-color: var(--white);
+	z-index: 99;
+	transition: transform 0.3s ease-in-out; 
+	transform: translateX(0);
+	color: var(--light-grey);
+}
+.menu{
+	display: flex;
+		flex-direction: column;
+		align-items: center;
+		flex: 1;
+	 padding-top: 32px;
+}
+
+.link {
+
+	text-decoration: none;
+	color: var(--light-grey);
+
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 36px;
+	cursor: pointer;
+
+	font-size: 12px;
+	line-height: 18px;
+}
+.link svg {
+	height: 24px;
+	width: 24px;
+	margin-bottom: 5px;
+	
+}
+.active path{
+	fill: var(--red-default);
+}
+.active{
+	color: var(--red-default);
+}
+
+.logOut {
+	gap:8px;
+	margin-bottom: 32px;
+}
+.logOut span{
+	color: var(--lightest-red);
+}
+.sidebarOpen {
+	transform: translateX(0);
+}
+.userSidebar {
+	display: none;
+}
+
+@media (max-width: 767px) {
+	.hamburger {
+		display: block;
+		width: 24px;
+		padding-left: 12px;
+		cursor: pointer;
+	}
+	.header{
+		height: 62px;
+	}
+	.sidebar {
+		transform: translateX(-100%);
+		height: calc(100% - 62px);
+		top: 62px;
+		width: 201px;
+		align-items: baseline;
+		
+	}
+
+	.sidebarOpen {
+		transform: translateX(0);
+	}
+	.userSidebar {
+		display: flex;
+		align-items: center;
+		margin-top: 16px;
+		padding-left: 16px;
+	}
+	.userSidebar img{
+		width: 40px;
+		height: 40px;
+	}
+	.userSidebar span{
+		color: var(--text);
+		margin-left: 8px;
+		size: 15px;
+	}
+	.divider {
+	
+			background: var(--light-grey);
+			width: 100%;
+			margin-top: 15px;
+		}
+
+	.link{
+		flex-direction: row;
+		padding-left: 20px;
+		font-size: 13px;
+		gap: 8px;
+	}
+	
+	.user{
+		display: none;
+	}
+	.logo{
+		padding-left: 0;
+			margin: 0 auto;
+		width: auto;
+		height: 34px;
+	}
+}
+			 
+
+
+
+
+
