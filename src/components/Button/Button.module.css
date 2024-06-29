@@ -1,20 +1,14 @@
 
 .button{
 	
-	justify-content: center;
-	align-items: center;
-	padding: 8px 24px;
 	cursor: pointer;
-	
-	margin: 10px;
 
-	display: flex;
-	flex-direction: row;
 	border-radius: 4px;
 
 	font-family: 'Avenir-Medium';
 	font-size: 15px;
 	font-weight: 500;
+	padding-inline: 0;
 	
 }
 
@@ -72,3 +66,9 @@
 	border: 1px solid var(--light-grey);
 
 } 
+ @media (max-width: 767px) {
+ 	.add {
+width: 351px;
+	height: 40px;
+ 	}
+}

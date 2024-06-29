@@ -1,3 +1,4 @@
+
 .header {
 	height: 80px;
 	display: flex;
@@ -7,25 +8,27 @@
 	background: var(--white);
 	box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
 	z-index: 100;
+	width: 100%;
 }
 
 .logo {
-
-	padding-left: 51px;
+width: 175px;;
+height: 44px;
+	margin-left: 3.25%;
 }
 
 .user img{
-	width: 36px;
-	height: 36px;
+	width: auto;
+	height: 2.3rem;
 }
 .user span{
-	margin-top: 4px;
-	margin-right: 16px;
+	margin-top: 4%;
+	margin-right: 1rem;
 }
 .user {
 	display:flex;
 	align-items: center;
-	margin-right: 51px;
+		margin-right: 3.25%;
 }
 
 .hamburger {
@@ -35,8 +38,8 @@
 .sidebar {
 
 	position: fixed;
-	height: calc(100% - 80px);
-	top: 80px;
+	height: calc(100% - 4.5rem);
+	top: 4.5rem;
 	display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -154,13 +157,37 @@
 	.logo{
 		padding-left: 0;
 			margin: 0 auto;
-		width: auto;
+
+	} 
+}
+ @media (max-width: 480px) {
+	.logo{
+		width: 137px;
 		height: 34px;
 	}
-}
-			 
-
-
-
-
-
+ }
+ @media (max-width: 1080px) {
+ 	.logo {
+ 		width: 150px;
+ 		height: 40px;
+ 	}
+	.link {
+		font-size: 11px;
+		line-height: 17px;
+	}
+	.link svg {
+		height: 21px;
+		width: 21px;
+		margin-bottom: 4px;
+		
+	}
+	.sidebar{
+		width: 110px;
+	}
+	.header{
+		height:70px;
+	}
+	
+ }
+						
+						

@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { TeamsPage } from "./pages/teams/TeamsPage";
+import { TeamsPage } from "./pages/teams/TeamsPage/TeamsPage.tsx";
 import { PlayersPage } from "./pages/players/PlayersPage";
 import { MainLayout } from "./pages/layout/MainLayout/MainLayout.tsx";
 import { AuthLayout } from "./pages/layout/AuthLayout.tsx";

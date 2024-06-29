@@ -13,6 +13,7 @@
   
 }
 
+
 @font-face {
   font-family: 'Avenir-Medium';
   src: url('src/assets/fonts/Avenir-Medium.ttf') format('truetype');
@@ -45,3 +46,14 @@ body {
   height: 100%;
   width: 100%;
 } 
+@media (max-width: 1440px){
+  body{
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    font-size: 13px;
+  }
+}
