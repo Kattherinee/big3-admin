@@ -1,0 +1,119 @@
+.container {
+	width: 364px;
+	height: 40px;
+	position: relative;
+	border: 1px solid var(--lightest-grey);
+	border-radius: 4px;
+	background-color: var(--white);
+	display: flex;
+	align-items: center;
+}
+
+.value{
+display: flex;
+  flex-grow: 1;
+  align-items: center;
+  margin-left: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.clear-btn{
+ background: none;
+ color: var(--lightest-grey);
+ border: none;
+ outline: none;
+ cursor: pointer;
+ padding: 0;
+ font-size: 14px;
+}
+.clear-btn:focus,
+.clear-btn:hover{
+	color: var(--light-grey);
+}
+
+
+
+.option-card {
+	height: 23.5px;
+	width:fit-content;
+	background-color: var(--red-default);
+	color: var(--white);
+	border-radius: 4px;
+	padding: 0 5px;
+	margin-right: 8px;
+	font-family: 'Avenir-Book';
+	font-size: 14px;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+ .option-card img {
+	margin-left: 8px;
+	
+} 
+
+.divider {
+	height: 24px;
+	margin: 0 0 0 10px;
+	width: 0.5px;
+	background: var(--lightest-grey);
+	border: 0;
+}
+
+.caret{
+		padding-right: 16px;
+		padding-left: 12px;
+		margin: 0;
+}
+
+.options{
+	position: absolute;
+	margin:0;
+	padding: 0;
+	list-style: none;
+	display: none;
+	border: 1px solid var(--lightest-grey);
+	border-radius: 4px;
+	width: 100%;
+	left: 0;
+	top: calc(100% + 3px);
+	background-color: var(--lightest-grey1);
+	z-index: 1000;
+	
+
+}
+.options.show{
+	display: block;
+}
+.option{
+	padding: 8px 12px;
+	cursor: pointer;
+		color: var(--light-grey);
+		border-bottom: 1px solid var(--lightest-grey);
+}
+
+
+
+
+.option.highlighted {
+	background-color: var(--light-red);
+	color: var(--white);
+}
+.option.selected {
+	background-color: var(--dark-red);
+color: var(--white);
+
+}
+@media (max-width: 1080px) {
+	.container {
+		max-width: 356px;
+		height: 35px;
+	}
+}
+
+@media (max-width: 756px) {
+	.container {
+		width: 351px;
+	}
+}
