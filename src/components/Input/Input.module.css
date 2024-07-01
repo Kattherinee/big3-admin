@@ -1,25 +1,13 @@
-.inputContainer {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 16px;
-}
-.label{
-	margin-bottom: 4px;
-		color: var(--grey);
-}
+
+
 .input{
 	width: 366px;
 	height: 40px;
 	border-radius: 4px ;
-
 	background: var(--lightest-grey1);
 	border: none;
-
 	font-family: 'Avenir-Medium';
 		font-size: 14px;
-		font-weight: 500;
-		line-height: 24px;
-
 	color: var(--text);
 	padding-left: 12px;
 }
@@ -35,13 +23,14 @@
 .input:disabled{
 	color: var(--lightest-grey);
 }
-.errorInput{
- border-color: var(--lightest-red);
-}
+@media (max-width: 767px){
+	.input{
+			width: 327px;
+	}
 
-.errorMessage{
-	height: 24px;
-	color:var(--lightest-red);
-	font-size: 12px;
-	line-height: 18px;
+}
+@media (max-width: 1080px){
+	.input {
+			width: 352px;
+		}
 }

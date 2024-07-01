@@ -5,7 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { TeamsPage } from "./pages/teams/TeamsPage/TeamsPage.tsx";
-import { PlayersPage } from "./pages/players/PlayersPage";
+import { PlayersPage } from "./pages/players/PlayersPage/PlayersPage.tsx";
 import { MainLayout } from "./pages/layout/MainLayout/MainLayout.tsx";
 import { AuthLayout } from "./pages/layout/AuthLayout.tsx";
 

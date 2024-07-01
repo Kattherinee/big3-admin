@@ -1,0 +1,48 @@
+import React from "react";
+import Search from "../../../components/search/Search";
+import Button from "../../../components/Button/Button";
+import { MultiSelect } from "../../../components/Multiselect/Multiselect";
+import styles from "./PlayersPage.module.css";
+import PlayerCard from "../components/PlayerCard/PlayerCard";
+
+// const token =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiRWNhdGVyaW5hIiwidGVuYW50IjoiMTA4NCIsIm5iZiI6MTcxOTgyNjc1NSwiZXhwIjoxNzE5OTEzMTU1LCJpc3MiOiJUZXN0LUJhY2tlbmQtMSIsImF1ZCI6IkJhc2tldEJhbGxDbHViU2FtcGxlIn0.GWQGn6grIy8Wn1IURczJgOoHEUHhpkMVbBQq-XwSSL8";
+
+// axios
+//   .get("http://dev.trainee.dex-it.ru/api/Team/GetTeams", {
+//     headers: {
+//       accept: "application/json",
+//       Authorization: `Bearer ${token}`,
+//     },
+//   })
+//   .then((response) => {
+//     console.log(response.data);
+//   })
+//   .catch((error) => {
+//     console.error("Error fetching data:", error);
+//   });
+const options = [
+  { name: "Denver Nuggets", id: 1098 },
+  { name: "Portland trail blazers", id: 1011 },
+  { name: "Minnesota timberwolves", id: 1023 },
+  { name: "Philadelphia seventy sixers", id: 1021 },
+];
+
+export const PlayersPage: React.FC = () => {
+  return (
+    <>
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <div className={styles.head}>
+            <Search />
+            <MultiSelect options={options} />
+            <Button appearence="add">Add +</Button>
+          </div>
+          <div className={styles.cards}>
+            <PlayerCard />
+          </div>
+        </main>
+      </div>
+    </>
+  );
+};

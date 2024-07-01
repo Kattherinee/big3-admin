@@ -4,34 +4,38 @@
 
 .main {
 	flex: 1;
-	
+
 }
 
-.head{
+.head {
 	display: flex;
 	justify-content: space-between;
+	gap: 8px;
 }
-.cards{
+
+.cards {
 	margin: 25px 0;
 }
 
 @media (max-width: 767px) {
-	
+
 	.sidebarPlaceholder {
 		width: 0;
 	}
-.main{
-	padding: 0%;
-}
+
+	.main {
+		padding: 0%;
+	}
+
 	.content {
 		margin-left: 0;
 	}
-	.head{
+
+	.head {
 		flex-direction: column;
 		align-items: center;
 		gap: 16px;
 	}
 }
-@media (max-hight: 900px){
 
-}
+@media (max-hight: 900px) {}

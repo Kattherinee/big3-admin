@@ -72,3 +72,9 @@ width: 351px;
 	height: 40px;
  	}
 }
+@media (max-width: 1080px){
+	.add{
+		height: 36px;
+		min-width: 70px;
+	}
+}
