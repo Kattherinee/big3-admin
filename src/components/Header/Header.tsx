@@ -49,7 +49,7 @@ const Header: React.FC = () => {
         <hr className={styles.divider} />
         <div className={styles.menu}>
           <NavLink
-            to="/teams"
+            to="teams"
             className={({ isActive }) =>
               cn(styles.link, { [styles.active]: isActive })
             }
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
             <span>Teams</span>
           </NavLink>
           <NavLink
-            to="/players"
+            to="players"
             className={({ isActive }) =>
               cn(styles.link, { [styles.active]: isActive })
             }
@@ -104,7 +104,7 @@ const Header: React.FC = () => {
           </NavLink>
         </div>
 
-        <Link to="/logIn" className={cn(styles.link, styles.logOut)}>
+        <Link to="auth/signIn" className={cn(styles.link, styles.logOut)}>
           <img src="src\assets\icon\logOut_red.svg" alt="" />
           <span>Sign out</span>
         </Link>

@@ -66,15 +66,23 @@
 	border: 1px solid var(--light-grey);
 
 } 
- @media (max-width: 767px) {
- 	.add {
-width: 351px;
-	height: 40px;
- 	}
-}
-@media (max-width: 1080px){
-	.add{
+
+@media (max-width: 1080px) {
+	.add {
 		height: 36px;
 		min-width: 70px;
+	}
+		.signIn {
+			width: 343px;
+		}
+
+}
+ @media (max-width: 767px) {
+ 	.add {
+  width: 351px;
+	height: 40px;
+ 	}
+	.signIn{
+		width: 327px;
 	}
 }

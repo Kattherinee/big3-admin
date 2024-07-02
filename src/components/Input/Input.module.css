@@ -1,14 +1,14 @@
 
 
 .input{
-	width: 366px;
+	width: 354px;
 	height: 40px;
 	border-radius: 4px ;
 	background: var(--lightest-grey1);
 	border: none;
 	font-family: 'Avenir-Medium';
-		font-size: 14px;
-	color: var(--text);
+	padding-block: 0;
+	padding-inline: 0;
 	padding-left: 12px;
 }
 .input:hover{
@@ -23,14 +23,16 @@
 .input:disabled{
 	color: var(--lightest-grey);
 }
-@media (max-width: 767px){
-	.input{
-			width: 327px;
-	}
 
-}
+
 @media (max-width: 1080px){
 	.input {
-			width: 352px;
+			width: 331px;
 		}
+}
+@media (max-width: 767px) {
+	.input {
+		width: 315px;
+	}
+
 }

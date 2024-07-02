@@ -100,72 +100,7 @@ height: 44px;
 	display: none;
 }
 
-@media (max-width: 767px) {
-	.hamburger {
-		display: block;
-		width: 24px;
-		padding-left: 12px;
-		cursor: pointer;
-	}
-	.header{
-		height: 62px;
-	}
-	.sidebar {
-		transform: translateX(-100%);
-		height: calc(100% - 62px);
-		top: 62px;
-		width: 201px;
-		align-items: baseline;
-		
-	}
 
-	.sidebarOpen {
-		transform: translateX(0);
-	}
-	.userSidebar {
-		display: flex;
-		align-items: center;
-		margin-top: 16px;
-		padding-left: 16px;
-	}
-	.userSidebar img{
-		width: 40px;
-		height: 40px;
-	}
-	.userSidebar span{
-		color: var(--text);
-		margin-left: 8px;
-		size: 15px;
-	}
-	.divider {
-	
-			background: var(--light-grey);
-			width: 100%;
-			margin-top: 15px;
-		}
-
-	.link{
-		flex-direction: row;
-		padding-left: 20px;
-		font-size: 13px;
-		gap: 8px;
-	}
-	
-	.user{
-		display: none;
-	}
-	.logo{
-		padding-left: 0;
-			margin: 0 auto;
-
-	} 
-}
- @media (max-width: 480px) {
-	.logo{
-		width: 137px;
-		height: 34px;
-	}
- }
  @media (max-width: 1080px) {
  	.logo {
  		width: 150px;
@@ -189,5 +124,78 @@ height: 44px;
 	}
 	
  }
-						
+		@media (max-width: 767px) {
+			.hamburger {
+				display: block;
+				width: 24px;
+				padding-left: 12px;
+				cursor: pointer;
+			}
+	
+			.header {
+				height: 62px;
+			}
+	
+			.sidebar {
+				transform: translateX(-100%);
+				height: calc(100% - 62px);
+				top: 62px;
+				width: 201px;
+				align-items: baseline;
+	
+			}
+	
+			.sidebarOpen {
+				transform: translateX(0);
+			}
+	
+			.userSidebar {
+				display: flex;
+				align-items: center;
+				margin-top: 16px;
+				padding-left: 16px;
+			}
+	
+			.userSidebar img {
+				width: 40px;
+				height: 40px;
+			}
+	
+			.userSidebar span {
+				color: var(--text);
+				margin-left: 8px;
+				size: 15px;
+			}
+	
+			.divider {
+	
+				background: var(--light-grey);
+				width: 100%;
+				margin-top: 15px;
+			}
+	
+			.link {
+				flex-direction: row;
+				padding-left: 20px;
+				font-size: 13px;
+				gap: 8px;
+			}
+	
+			.user {
+				display: none;
+			}
+	
+			.logo {
+				padding-left: 0;
+				margin: 0 auto;
+	
+			}
+		}
+	
+		@media (max-width: 480px) {
+			.logo {
+				width: 137px;
+				height: 34px;
+			}
+		}
 						

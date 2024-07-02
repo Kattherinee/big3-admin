@@ -1,0 +1,67 @@
+.container {
+	display: flex;
+	height: 100vh;
+	width: 100vw;
+
+}
+
+.img-section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #F5FBFF;
+	flex: 57%;
+}
+
+.img-section img {
+	width: 65%;
+
+}
+
+.form {
+	flex: 43%;
+	flex-direction: column;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--white);
+
+}
+
+.header {
+	font-family: 'Avenir-Book';
+	font-weight: 400;
+	font-size: 2.6em;
+	color: var(--blue);
+}
+.text {
+	color: var(--light-grey);
+	padding-top: 24px;
+	margin-block-start: 0;
+	margin-block-end: 0;
+}
+
+.link {
+	padding-left: 4px;
+	color: var(--dark-red);
+}
+
+.link:hover {
+	color: var(--red-default);
+}
+@media (max-width:1080px) {
+	.img-section {
+		flex: 50%;
+	}
+
+	.form {
+		flex: 50%;
+	}
+}
+
+@media (max-width:756px) {
+	.img-section {
+		display: none;
+	}
+
+}

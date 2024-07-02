@@ -16,19 +16,19 @@
 
 @font-face {
   font-family: 'Avenir-Medium';
-  src: url('src/assets/fonts/Avenir-Medium.ttf') format('truetype');
+  src: url('/src/assets/fonts/Avenir-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: 'Avenir-Book';
-  src: url('src/assets/fonts/Avenir-Book.ttf') format('truetype');
+  src: url('/src/assets/fonts/Avenir-Book.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: 'Avenir-Black';
-  src: url('src/assets/fonts/Avenir-Black.ttf') format('truetype');
+  src: url('/src/assets/fonts/Avenir-Black.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }

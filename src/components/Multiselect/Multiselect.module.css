@@ -7,6 +7,7 @@
 	background-color: var(--white);
 	display: flex;
 	align-items: center;
+	font-family: 'Avenir-Medium';
 }
 
 .value{
@@ -16,6 +17,7 @@ display: flex;
   margin-left: 12px;
   overflow: hidden;
   white-space: nowrap;
+
 }
 
 .clear-btn{
