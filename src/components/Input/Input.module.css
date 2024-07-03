@@ -1,5 +1,9 @@
 
-
+.inputContainer {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
 .input{
 	width: 354px;
 	height: 40px;
@@ -22,6 +26,16 @@
 	}
 .input:disabled{
 	color: var(--lightest-grey);
+}
+
+.passwordToggleIcon {
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	width: 16px;
+	/* Adjust size as needed */
+	height: 16px;
+	/* Adjust size as needed */
 }
 
 

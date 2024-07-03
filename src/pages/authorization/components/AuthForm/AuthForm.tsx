@@ -1,6 +1,7 @@
+import { useState } from "react";
 import styles from "./AuthForm.module.css";
 import InputField from "../../../../components/Input/Input";
-
+import Checkbox from "../../../../components/CheckBox/Checkbox";
 import Button from "../../../../components/Button/Button";
 import cn from "classnames";
 
@@ -9,6 +10,12 @@ interface IAuthForm {
 }
 
 function AuthForm({ appearence }: IAuthForm) {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked((prevChecked) => !prevChecked);
+  };
+
   return (
     <div className={styles.formContainer}>
       <form className={cn(styles["form"])}>
@@ -18,15 +25,15 @@ function AuthForm({ appearence }: IAuthForm) {
           })}
         >
           <label htmlFor="Name">Name</label>
-          <InputField />
+          <InputField type="text" />
         </div>
         <div className={cn(styles.input, styles.login)}>
           <label htmlFor="login">Login</label>
-          <InputField />
+          <InputField type="text" />
         </div>
         <div className={cn(styles.input, styles.password)}>
           <label htmlFor="password">Password</label>
-          <InputField />
+          <InputField type="password" />
         </div>
         <div
           className={cn(styles.input, {
@@ -34,15 +41,18 @@ function AuthForm({ appearence }: IAuthForm) {
           })}
         >
           <label htmlFor="password">Enter your password again</label>
-          <InputField />
+          <InputField type="password" />
         </div>
         <div
           className={cn(styles.check, {
             [styles["signIn"]]: appearence === "signIn",
           })}
         >
-          <input type="checkbox" />
-          <span>I accept the agreement</span>
+          <Checkbox
+            label="I accept the agreement"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />
         </div>
 
         <Button appearence="sign">Sign In</Button>

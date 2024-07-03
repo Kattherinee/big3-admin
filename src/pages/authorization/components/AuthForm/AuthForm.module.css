@@ -27,7 +27,6 @@ padding-bottom: 24px;
 }
 .check span{
 	color: var(--grey);
-	padding-left: 8px;
 }
 .check input{
 	color: var(--grey)

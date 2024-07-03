@@ -1,13 +1,45 @@
-import { forwardRef } from "react";
+import { useState, forwardRef } from "react";
 import styles from "./Input.module.css";
-//import cn from "classnames";
+import cn from "classnames";
 import { InputProps } from "./Input.props";
+import showPasswordIcon from "/src/assets/icon/close_eye.svg";
+import hidePasswordIcon from "/src/assets/icon/eye.svg";
 
 const InputField = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { className, ...props },
+  { type = "text", className, ...props },
   ref
 ) {
-  return <input ref={ref} className={styles.input} type="text" {...props} />;
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prev) => !prev);
+  };
+
+  const isPassword = type === "password";
+  const inputType = isPassword
+    ? isPasswordVisible
+      ? "text"
+      : "password"
+    : type;
+
+  return (
+    <div className={styles.inputContainer}>
+      <input
+        ref={ref}
+        className={cn(styles.input)}
+        type={inputType}
+        {...props}
+      />
+      {isPassword && (
+        <img
+          src={isPasswordVisible ? hidePasswordIcon : showPasswordIcon}
+          alt={isPasswordVisible ? "Hide password" : "Show password"}
+          onClick={togglePasswordVisibility}
+          className={styles.passwordToggleIcon}
+        />
+      )}
+    </div>
+  );
 });
 
 export default InputField;

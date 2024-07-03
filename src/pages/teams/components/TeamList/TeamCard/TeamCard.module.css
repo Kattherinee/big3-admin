@@ -17,7 +17,7 @@
 }
 .head{
 	background: linear-gradient(121.57deg, #707070 1.62%, #393939 81.02%);
-	height:170px;
+	height:160px;
 	width: 100%;
 	border-radius: 4px 4px 0 0;
 	display: flex;
@@ -27,15 +27,16 @@
 
 .logo {
 	width: 100%;
-	height: 100px;
+	height: 95px;
 	object-fit: contain;
 }
 
 .details {
-	padding:  17px 0;
+	padding:  15px 0;
 	display: flex;
 	flex-direction: column;
-gap: 2px;
+	gap: 2px;
+
 }
 
 .name  {
