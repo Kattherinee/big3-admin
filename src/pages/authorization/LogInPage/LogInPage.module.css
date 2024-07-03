@@ -42,11 +42,11 @@ width:100vw;
 
 .link {
 		padding-left: 4px;
-	color: var(--dark-red);
+	color: var(--red-default);
 }
 
 .link:hover {
-	color: var(--red-default);
+	color: var(--dark-red);
 }
 @media (max-width:1080px) {
 	.img-section{
