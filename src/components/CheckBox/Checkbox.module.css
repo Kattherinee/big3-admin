@@ -3,7 +3,7 @@
 	align-items: center;
 	position: relative;
 	cursor: pointer;
-	margin-bottom: 8px;
+
 }
 
 .input {
@@ -30,7 +30,7 @@ cursor: pointer;
 }
 .label {
 	font-size: 14px;
-	color: #333;
+ color: var(--grey)
 }
 
 .input:hover+.custom {
@@ -53,9 +53,17 @@ cursor: pointer;
 	border-color: var(--lightest-grey);
 }
 
+
 .disabled.label{
 	color: var(--lightest-grey);
 }
 .disabled.checked.custom{
 background-color: var(--lightest-grey);
+}
+.errorLabel {
+	color: var(--lightest-red);
+}
+
+.errorCustom {
+	border-color: var(--lightest-red);
 }

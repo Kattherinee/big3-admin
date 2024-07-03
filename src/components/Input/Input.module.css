@@ -37,7 +37,12 @@
 	height: 16px;
 	/* Adjust size as needed */
 }
-
+.errorContainer .input {
+	border: 1px solid var(--lightest-red);
+}
+.errorContainer .input:focus {
+box-shadow: 0px 0px 4px var(--lightest-red);
+}
 
 @media (max-width: 1080px){
 	.input {

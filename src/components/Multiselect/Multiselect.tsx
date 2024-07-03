@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, createRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./Multiselect.module.css";
 import cn from "classnames";
 
