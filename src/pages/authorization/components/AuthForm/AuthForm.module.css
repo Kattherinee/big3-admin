@@ -1,3 +1,14 @@
+.container{
+display: flex;
+	height: 100vh;
+	width: 100vw;
+}
+.error-section{
+		flex: 57%;
+}
+.form-section{
+	flex: 43%;
+}
 .formContainer{
 	display: flex;
 	align-items: center;
@@ -52,7 +63,13 @@ padding-bottom: 24px;
 .error.button{
 	margin-top: 20px;
 }
-
+.serverError {
+	color: var(--lightest-red);
+	font-size: 12px;
+	margin-top: 2px;
+	padding-bottom: 12px;
+	/* Для изменения padding при ошибке */
+}
 @media (max-width:756px) {
 	label{
 		font-size: 17px;

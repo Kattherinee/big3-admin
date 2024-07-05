@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Header.module.css";
 import { Link, NavLink } from "react-router-dom";
-
 import cn from "classnames";
 
 const Header: React.FC = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>("");
+
+  useEffect(() => {
+    const storedUserName = localStorage.getItem("userName");
+    if (storedUserName) {
+      setUserName(storedUserName);
+    }
+  }, []);
 
   const toggleHamburger = () => {
     setHamburgerOpen(!hamburgerOpen);
@@ -32,7 +39,7 @@ const Header: React.FC = () => {
         />
 
         <div className={styles.user}>
-          <span>John Smith</span>
+          <span>{userName}</span>
           <img src="src/assets/icon/profile.svg" alt="Photo" />
         </div>
       </header>
@@ -44,7 +51,7 @@ const Header: React.FC = () => {
       >
         <div className={styles.userSidebar}>
           <img src="src/assets/icon/profile.svg" alt="Photo" />
-          <span>John Smith</span>
+          <span>{userName}</span>
         </div>
         <hr className={styles.divider} />
         <div className={styles.menu}>

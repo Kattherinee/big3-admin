@@ -1,7 +1,7 @@
-import styles from "./LogInPage.module.css";
 import React from "react";
-import AuthForm from "../components/AuthForm/AuthForm";
 import { Link } from "react-router-dom";
+import AuthForm from "../components/AuthForm/AuthForm";
+import styles from "./LogInPage.module.css";
 
 export const LogInPage: React.FC = () => {
   return (

@@ -1,0 +1,22 @@
+.serverError {
+	position: absolute;
+	top: 0;
+  right: 0;
+  margin: 2em;
+	background-color:var(--light-red);
+	color: var(--white);
+	border-radius: 4px;
+	z-index: 1000;
+	font-size: 16px;
+	padding: 8px 16px;
+}
+@media (max-width:1080px){
+	.serverError{
+		font-size: 15px;
+	}
+}
+@media (max-width:576px) {
+	.serverError {
+		font-size: 14px;
+	}
+}
