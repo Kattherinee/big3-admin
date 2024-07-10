@@ -1,0 +1,68 @@
+.avatar-cover {
+  position: relative;
+  width: 336px;
+  height: 251px;
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding-bottom: 0;
+}
+
+.avatarOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #9c9c9c7c;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.avatarOverlay img {
+  width: 71px;
+  height: auto;
+}
+.hiddenInput {
+  display: none;
+}
+@media (max-width: 1286px) {
+  .avatar-cover {
+    width: 276px;
+    height: 205px;
+  }
+  .avatarOverlay img {
+    width: 61px;
+    height: auto;
+  }
+}
+@media (max-width: 1080px) {
+  .avatar-cover {
+    width: 225px;
+    height: 167px;
+  }
+  .avatarOverlay img {
+    width: 51px;
+    height: auto;
+  }
+}
+
+@media (max-width: 756px) {
+  .avatar-cover {
+    width: 185px;
+    height: 144px;
+  }
+  .avatarOverlay img {
+    width: 41px;
+    height: auto;
+  }
+}

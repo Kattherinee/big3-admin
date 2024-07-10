@@ -1,45 +1,42 @@
 .mainLayout {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	width: 100vw;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
 }
 
 .contentWrapper {
-	display: flex;
-	flex: 1;
-
+  display: flex;
+  flex: 1;
 }
 
 .sidebarPlaceholder {
-	width: 140px;
-
-}	
+  width: 140px;
+}
 
 .content {
-	flex: 1;
-	padding: 32px 80px;
-	width: 100vw;
-	position: relative;
+  flex: 1;
+  padding: 32px 80px;
+  width: 100vw;
+  position: relative;
 }
 
-@media (max-width: 1080px){
-	.content{
-	padding: 20px 50px;
-	}
-	.sidebarPlaceholder{
-		width: 110px;
-	}
-	
+@media (max-width: 1080px) {
+  .content {
+    padding: 20px 50px;
+  }
+  .sidebarPlaceholder {
+    width: 110px;
+  }
 }
 @media (max-width: 767px) {
-	.sidebarPlaceholder {
-		width: 0;
-	}
+  .sidebarPlaceholder {
+    width: 0;
+  }
 
-	.content {
-		padding: 16px;
-	}
+  .content {
+    padding: 16px 0;
+  }
 }
 /* @media (max-height: 800px){
 	

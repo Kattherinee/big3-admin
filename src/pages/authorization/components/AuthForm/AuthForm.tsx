@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import styles from "./AuthForm.module.css";
-import InputField from "../../../../components/Input/Input";
-import Checkbox from "../../../../components/CheckBox/Checkbox";
-import Button from "../../../../components/Button/Button";
+import InputField from "../../../../ui/Input/Input";
+import Checkbox from "../../../../ui/CheckBox/Checkbox";
+import Button from "../../../../ui/Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../../core/redux/store/store";
 import {
-  registerUser,
-  loginUser,
-} from "../../../../api/requests/authorization";
-import { UnauthorizedResult } from "../../../../api/dto/AuthorizationDto/UnauthorizedResult";
-import ServerError from "../../../../components/ServerError/ServerError";
+  registry,
+  authorize,
+  selectUser,
+} from "../../../../core/redux/store/user.slice";
+import ServerError from "../../../../ui/ServerError/ServerError";
 
 interface IAuthFormProps {
   appearence: "signIn" | "signUp";
@@ -38,47 +40,41 @@ function AuthForm({ appearence }: IAuthFormProps) {
   const [serverError, setServerError] = useState<string | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const userState = useSelector(selectUser);
+  const token = useSelector((s: RootState) => s.user.token);
+
+  useEffect(() => {
+    if (token) {
+      navigate("/teams");
+    }
+  }, [token, navigate]);
+
+  useEffect(() => {
+    if (userState) {
+      if (userState.error === "Unauthorized") {
+        setServerError(
+          "User with the specified username / password was not found."
+        );
+        setError("password", {
+          type: "manual",
+          message: "Incorrect password",
+        });
+      }
+    }
+  }, [userState, setError]);
 
   const submit: SubmitHandler<IFormInputs> = async (data) => {
     const { name, login, password } = data;
     setServerError(null);
     setAuthError(null);
 
-    try {
-      if (appearence === "signUp") {
-        const response = await registerUser({
-          userName: name!,
-          login,
-          password,
-        });
-        const { token } = response.data;
-        localStorage.setItem("token", token);
-        localStorage.setItem("userName", name!);
-        navigate("/teams");
-      } else {
-        const response = await loginUser({ login, password });
-        const { token } = response.data;
-        localStorage.setItem("token", token);
-        localStorage.setItem("userName", login);
-        navigate("/teams");
-      }
-      reset();
-    } catch (error: any) {
-      if (error as UnauthorizedResult) {
-        if (error.status === 401) {
-          setServerError(
-            "User with the specified username / password was not found."
-          );
-          setError("password", {
-            type: "manual",
-            message: "Incorrect password",
-          });
-        }
-      } else {
-        console.error(error);
-        setServerError("An unexpected error occurred. Please try again.");
-      }
+    if (appearence === "signUp") {
+      dispatch(registry({ userName: name!, login, password }));
+    } else {
+      dispatch(authorize({ login, password }));
     }
+    reset();
   };
 
   const password = watch("password");

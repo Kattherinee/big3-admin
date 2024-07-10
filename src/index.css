@@ -1,53 +1,51 @@
 :root {
   --text: #303030;
   --grey: #707070;
-  --light-grey: #9C9C9C;
-  --lightest-grey: #D1D1D1;
-  --lightest-grey1: #F6F6F6;
-  --dark-red: #C60E2E;
-  --red-default: #E4163A;
-  --light-red: #FF5761;
-  --lightest-red: #FF768E;
+  --light-grey: #9c9c9c;
+  --lightest-grey: #d1d1d1;
+  --lightest-grey1: #f6f6f6;
+  --dark-red: #c60e2e;
+  --red-default: #e4163a;
+  --light-red: #ff5761;
+  --lightest-red: #ff768e;
   --blue: #344472;
-  --white: #FFFFFF;
-  
+  --white: #ffffff;
 }
 
-
 @font-face {
-  font-family: 'Avenir-Medium';
-  src: url('/src/assets/fonts/Avenir-Medium.ttf') format('truetype');
+  font-family: "Avenir-Medium";
+  src: url("/src/assets/fonts/Avenir-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Avenir-Book';
-  src: url('/src/assets/fonts/Avenir-Book.ttf') format('truetype');
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Avenir-Black';
-  src: url('/src/assets/fonts/Avenir-Black.ttf') format('truetype');
+  font-family: "Avenir-Black";
+  src: url("/src/assets/fonts/Avenir-Black.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
-body{
-  font-family: 'Avenir-Medium';
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 24px;
-    background: var(--lightest-grey1);
+body {
+  font-family: "Avenir-Medium";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  background: var(--lightest-grey1);
 }
- html,
+html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-} 
-@media (max-width: 1440px){
-  body{
+}
+@media (max-width: 1440px) {
+  body {
     font-size: 14px;
   }
 }

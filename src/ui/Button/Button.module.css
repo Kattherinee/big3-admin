@@ -1,0 +1,81 @@
+.button {
+  cursor: pointer;
+
+  border-radius: 4px;
+
+  font-family: "Avenir-Medium";
+  font-size: 15px;
+  font-weight: 500;
+  padding-inline: 0;
+}
+
+.signIn {
+  width: 365px;
+  height: 40px;
+  background: var(--red-default);
+  border: none;
+  color: var(--white);
+}
+
+.add {
+  width: 104px;
+  height: 40px;
+  background: var(--red-default);
+  border: none;
+  color: var(--white);
+}
+.cancel {
+  box-sizing: border-box;
+  background: var(--white);
+  width: 171px;
+  height: 40px;
+  border: 1px solid var(--light-grey);
+
+  color: var(--light-grey);
+}
+
+.button:hover {
+  background: var(--light-red);
+}
+
+.button:active {
+  background: var(--dark-red);
+}
+
+.cancel:hover {
+  background: var(--lightest-grey);
+}
+.cancel:active {
+  border: 1px solid var(--grey);
+  background: var(--light-grey);
+
+  color: var(--grey);
+}
+
+.button:disabled {
+  background: var(--lightest-grey1);
+  color: var(--lightest-grey);
+  cursor: not-allowed;
+}
+.cancel:disabled {
+  border: 1px solid var(--light-grey);
+}
+
+@media (max-width: 1080px) {
+  .add {
+    height: 36px;
+    min-width: 70px;
+  }
+  .signIn {
+    width: 343px;
+  }
+}
+@media (max-width: 767px) {
+  .add {
+    width: 327px;
+    height: 40px;
+  }
+  .signIn {
+    width: 327px;
+  }
+}

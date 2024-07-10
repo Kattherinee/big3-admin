@@ -1,6 +1,6 @@
 import React from "react";
-import Search from "../../../components/search/Search";
-import Button from "../../../components/Button/Button";
+import Search from "../../../ui/search/Search";
+import Button from "../../../ui/Button/Button";
 import TeamCard from "../components/TeamList/TeamCard/TeamCard";
 
 import styles from "./TeamsPage.module.css";

@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./Header.module.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import cn from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../core/redux/store/store";
+import { selectUser, userActions } from "../../core/redux/store/user.slice";
 
 const Header: React.FC = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("");
+  const dispatch = useDispatch<AppDispatch>();
+  const { userName, avatarUrl } = useSelector(selectUser);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUserName = localStorage.getItem("userName");
-    if (storedUserName) {
-      setUserName(storedUserName);
-    }
-  }, []);
+  const logOut = () => {
+    dispatch(userActions.logout());
+  };
 
   const toggleHamburger = () => {
     setHamburgerOpen(!hamburgerOpen);
@@ -20,6 +22,10 @@ const Header: React.FC = () => {
 
   const closeHamburger = () => {
     setHamburgerOpen(false);
+  };
+  const handleUserClick = () => {
+    navigate("/editProfile");
+    closeHamburger();
   };
 
   return (
@@ -38,9 +44,14 @@ const Header: React.FC = () => {
           className={styles.logo}
         />
 
-        <div className={styles.user}>
+        <div onClick={() => navigate("/editProfile")} className={styles.user}>
           <span>{userName}</span>
-          <img src="src/assets/icon/profile.svg" alt="Photo" />
+          <div className={styles.avatarFit}>
+            <img
+              src={avatarUrl || "src/assets/icon/profile.svg"}
+              alt="User Avatar"
+            />
+          </div>
         </div>
       </header>
 
@@ -49,8 +60,13 @@ const Header: React.FC = () => {
           hamburgerOpen ? styles.sidebarOpen : ""
         }`}
       >
-        <div className={styles.userSidebar}>
-          <img src="src/assets/icon/profile.svg" alt="Photo" />
+        <div className={styles.userSidebar} onClick={handleUserClick}>
+          <div className={styles.avatarFit}>
+            <img
+              src={avatarUrl || "src/assets/icon/profile.svg"}
+              alt="User Avatar"
+            />
+          </div>
           <span>{userName}</span>
         </div>
         <hr className={styles.divider} />
@@ -111,7 +127,11 @@ const Header: React.FC = () => {
           </NavLink>
         </div>
 
-        <Link to="auth/signIn" className={cn(styles.link, styles.logOut)}>
+        <Link
+          to="auth/signIn"
+          className={cn(styles.link, styles.logOut)}
+          onClick={logOut}
+        >
           <img src="src\assets\icon\logOut_red.svg" alt="" />
           <span>Sign out</span>
         </Link>

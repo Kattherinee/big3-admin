@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import Search from "../../../components/search/Search";
-import Button from "../../../components/Button/Button";
-import {
-  Select,
-  SelectOption,
-} from "../../../components/Multiselect/Multiselect";
+import Search from "../../../ui/search/Search";
+import Button from "../../../ui/Button/Button";
+import { Select, SelectOption } from "../../../ui/Multiselect/Multiselect";
 import styles from "./PlayersPage.module.css";
 import PlayerCard from "../components/PlayerCard/PlayerCard";
 

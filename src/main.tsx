@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import { Provider } from "react-redux";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage.tsx";
 import { TeamsPage } from "./pages/teams/TeamsPage/TeamsPage.tsx";
 import { PlayersPage } from "./pages/players/PlayersPage/PlayersPage.tsx";
@@ -11,12 +10,19 @@ import { MainLayout } from "./pages/layout/MainLayout/MainLayout.tsx";
 import { AuthLayout } from "./pages/layout/AuthLayout/AuthLayout.tsx";
 import { LogInPage } from "./pages/authorization/LogInPage/LogInPage.tsx";
 import { SignUpPage } from "./pages/authorization/SignUpPage/SignUpPage.tsx";
+import { RequireAuth } from "./api/helpers/RequireAuth.tsx";
+import { store } from "./core/redux/store/store.ts";
+import EditProfilePage from "./pages/EditProfilePage/EditProfilePage.tsx";
 
 const router = createBrowserRouter([
   //добавляем пути к страничкам
   {
     path: "/",
-    element: <MainLayout />,
+    element: (
+      <RequireAuth>
+        <MainLayout />
+      </RequireAuth>
+    ),
     children: [
       {
         path: "teams",
@@ -25,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "players",
         element: <PlayersPage />,
+      },
+      {
+        path: "editProfile",
+        element: <EditProfilePage />,
       },
     ],
   },
@@ -50,7 +60,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    <App />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
