@@ -1,3 +1,10 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
 .mainLayout {
   display: flex;
   flex-direction: column;
@@ -8,6 +15,12 @@
 .contentWrapper {
   display: flex;
   flex: 1;
+  flex-direction: row;
+}
+
+.headerPlaceholder {
+  height: 80px;
+  width: 100%;
 }
 
 .sidebarPlaceholder {
@@ -17,6 +30,7 @@
 .content {
   flex: 1;
   padding: 32px 80px;
+
   width: 100vw;
   position: relative;
 }
@@ -28,19 +42,19 @@
   .sidebarPlaceholder {
     width: 110px;
   }
+  .headerPlaceholder {
+    height: 70px;
+  }
 }
+
 @media (max-width: 767px) {
   .sidebarPlaceholder {
     width: 0;
   }
-
   .content {
     padding: 16px 0;
   }
+  .headerPlaceholder {
+    height: 62px;
+  }
 }
-/* @media (max-height: 800px){
-	
-	.content{
-		padding: 23px 80px;		
-	} */
-/* } */

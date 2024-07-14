@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../core/redux/store/store";
 import { selectUser } from "../../core/redux/store/user.slice";
-import { updateProfile } from "../../core/redux/store/user.thunks/updateProfileThunk";
+import { updateProfile } from "../../core/redux/user.thunks/updateProfileThunk";
 import { uploadImage } from "../../api/requests/uploadImageRequest";
 import { RootState } from "../../core/redux/store/store";
 import styles from "./EditProfilePage.module.css";
@@ -11,6 +11,7 @@ import Button from "../../ui/Button/Button";
 import InputField from "../../ui/Input/Input";
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import cn from "classnames";
+import Breadcrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 
 const EditProfile: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -51,7 +52,7 @@ const EditProfile: React.FC = () => {
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault(); // предотвращаем автоматическое обновление страницы
+    event.preventDefault();
 
     let avatarUrlToSend = newAvatarUrl;
 
@@ -83,46 +84,52 @@ const EditProfile: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.container}>
-      <div className={styles["avatar-container"]}>
-        <ImageUpload avatarUrl={newAvatarUrl} onChange={handleAvatarChange} />
-      </div>
-
-      <div className={styles["form-container"]}>
-        <div className={styles.input}>
-          <label className={styles["label-iput"]} htmlFor="name">
-            Name
-          </label>
-          <InputField
-            type="text"
-            onChange={handleNameChange}
-            value={newUserName}
-          />
+    <>
+      <form onSubmit={handleSubmit} className={styles.container}>
+        <div className={styles.breadcrumbs}>
+          <Breadcrumbs />
         </div>
-        <div className={styles.buttons}>
-          <Button
-            appearence="cancel"
-            onClick={() => navigate("/")}
-            className={styles.button}
-            type="button"
-          >
-            Cancel
-          </Button>
 
-          <Button
-            appearence="add"
-            disabled={isUploading}
-            className={cn(styles.button, styles["save-btn"])}
-            type="submit"
-          >
-            Save
-          </Button>
-          {isUploading && (
-            <p className={styles.uploadingMessage}>Uploading...</p>
-          )}
+        <div className={styles["avatar-container"]}>
+          <ImageUpload avatarUrl={newAvatarUrl} onChange={handleAvatarChange} />
         </div>
-      </div>
-    </form>
+
+        <div className={styles["form-container"]}>
+          <div className={styles.input}>
+            <label className={styles["label-input"]} htmlFor="name">
+              Name
+            </label>
+            <InputField
+              type="text"
+              onChange={handleNameChange}
+              value={newUserName}
+            />
+          </div>
+          <div className={styles.buttons}>
+            <Button
+              appearence="cancel"
+              onClick={() => navigate("/")}
+              className={styles.button}
+              type="button"
+            >
+              Cancel
+            </Button>
+
+            <Button
+              appearence="add"
+              disabled={isUploading}
+              className={cn(styles.button, styles["save-btn"])}
+              type="submit"
+            >
+              Save
+            </Button>
+            {isUploading && (
+              <p className={styles.uploadingMessage}>Uploading...</p>
+            )}
+          </div>
+        </div>
+      </form>
+    </>
   );
 };
 

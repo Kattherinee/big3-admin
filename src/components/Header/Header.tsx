@@ -32,14 +32,14 @@ const Header: React.FC = () => {
     <>
       <header className={styles.header}>
         <img
-          src="src/assets/icon/hamburger.svg"
+          src="/src/assets/icon/hamburger.svg"
           alt="Hamburger"
           className={styles.hamburger}
           onClick={toggleHamburger}
         />
 
         <img
-          src="src/assets/images/logo.png"
+          src="/src/assets/images/logo.png"
           alt="logo"
           className={styles.logo}
         />
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
           <span>{userName}</span>
           <div className={styles.avatarFit}>
             <img
-              src={avatarUrl || "src/assets/icon/profile.svg"}
+              src={avatarUrl || "/src/assets/icon/profile.svg"}
               alt="User Avatar"
             />
           </div>
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
         <div className={styles.userSidebar} onClick={handleUserClick}>
           <div className={styles.avatarFit}>
             <img
-              src={avatarUrl || "src/assets/icon/profile.svg"}
+              src={avatarUrl || "/src/assets/icon/profile.svg"}
               alt="User Avatar"
             />
           </div>
@@ -132,7 +132,7 @@ const Header: React.FC = () => {
           className={cn(styles.link, styles.logOut)}
           onClick={logOut}
         >
-          <img src="src\assets\icon\logOut_red.svg" alt="" />
+          <img src="/src/assets/icon/logOut_red.svg" alt="" />
           <span>Sign out</span>
         </Link>
       </div>

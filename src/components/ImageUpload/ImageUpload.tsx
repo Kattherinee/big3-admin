@@ -11,7 +11,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ avatarUrl, onChange }) => {
     <div className={styles["avatar-cover"]}>
       <label htmlFor="avatarUpload" className={styles.avatar}>
         <img
-          src={avatarUrl || "/path/to/default-avatar.png"}
+          src={avatarUrl || "/src/assets/images/Rectangle 207.png"}
           alt="Avatar Preview"
           className={styles.avatar}
         />

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { updateUserProfile } from "../../../../api/requests/UpdateProfileRequest";
-import { RootState } from "../store";
+import { updateUserProfile } from "../../../api/requests/UpdateProfileRequest";
+import { RootState } from "../store/store";
 
 export const updateProfile = createAsyncThunk(
   "user/updateProfile",

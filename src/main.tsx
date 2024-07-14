@@ -13,9 +13,9 @@ import { SignUpPage } from "./pages/authorization/SignUpPage/SignUpPage.tsx";
 import { RequireAuth } from "./api/helpers/RequireAuth.tsx";
 import { store } from "./core/redux/store/store.ts";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage.tsx";
+import TeamForm from "./pages/teams/components/TeamForm/TeamForm.tsx";
 
 const router = createBrowserRouter([
-  //добавляем пути к страничкам
   {
     path: "/",
     element: (
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "teams",
         element: <TeamsPage />,
+      },
+      {
+        path: "teams/add_new_team",
+        element: <TeamForm />,
       },
       {
         path: "players",

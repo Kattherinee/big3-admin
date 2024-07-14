@@ -3,7 +3,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background: var(--white);
   box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
   z-index: 100;
@@ -21,11 +24,12 @@
   align-items: center;
   margin-right: 3.25%;
 }
+
 .avatarFit {
   height: 2.3rem;
   width: 2.3rem;
   border-radius: 50%;
-  overflow: hidden; /* Ensure the image doesn't overflow the container */
+  overflow: hidden;
 }
 
 .avatarFit img {
@@ -33,6 +37,7 @@
   height: 100%;
   object-fit: cover;
 }
+
 .user span {
   margin-top: 4%;
   margin-right: 1rem;
@@ -44,8 +49,9 @@
 
 .sidebar {
   position: fixed;
-  height: calc(100% - 4.5rem);
-  top: 4.5rem;
+  height: calc(100% - 80px);
+  top: 80px;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,6 +62,7 @@
   transform: translateX(0);
   color: var(--light-grey);
 }
+
 .menu {
   display: flex;
   flex-direction: column;
@@ -67,24 +74,25 @@
 .link {
   text-decoration: none;
   color: var(--light-grey);
-
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 36px;
   cursor: pointer;
-
   font-size: 12px;
   line-height: 18px;
 }
+
 .link svg {
   height: 24px;
   width: 24px;
   margin-bottom: 5px;
 }
+
 .active path {
   fill: var(--red-default);
 }
+
 .active {
   color: var(--red-default);
 }
@@ -93,12 +101,15 @@
   gap: 8px;
   margin-bottom: 32px;
 }
+
 .logOut span {
   color: var(--lightest-red);
 }
+
 .sidebarOpen {
   transform: translateX(0);
 }
+
 .userSidebar {
   display: none;
 }
@@ -108,22 +119,28 @@
     width: 150px;
     height: 40px;
   }
+
   .link {
     font-size: 11px;
     line-height: 17px;
   }
+
   .link svg {
     height: 21px;
     width: 21px;
     margin-bottom: 4px;
   }
+
   .sidebar {
+    top: 70px;
     width: 110px;
   }
+
   .header {
     height: 70px;
   }
 }
+
 @media (max-width: 767px) {
   .hamburger {
     display: block;
@@ -160,6 +177,7 @@
     height: 100%;
     object-fit: cover;
   }
+
   .avatarFit {
     width: 40px;
   }

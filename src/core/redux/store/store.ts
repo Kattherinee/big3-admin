@@ -1,18 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./user.slice";
+import teamsSlice from "./teams.slice";
 import { saveState } from "./storage";
 import { TOKEN_PERSISTENT_STATE } from "./user.slice";
 
-
 export const store = configureStore({
-	reducer: {
-		user: userSlice
-	}
+  reducer: {
+    user: userSlice,
+    teams: teamsSlice,
+  },
 });
 
-store.subscribe(()=>{
-	saveState({token: store.getState().user.token},TOKEN_PERSISTENT_STATE)
-})
+store.subscribe(() => {
+  saveState({ token: store.getState().user.token }, TOKEN_PERSISTENT_STATE);
+});
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch; 
+export type AppDispatch = typeof store.dispatch;

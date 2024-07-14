@@ -1,4 +1,3 @@
-// UploadImageRequest.ts
 import baseRequest from "../baseRequest";
 
 export const uploadImage = async (
@@ -15,7 +14,6 @@ export const uploadImage = async (
     },
   });
 
-  // Assuming the API returns a relative path like "/images/o3p0clc4.jpg"
   const imagePath = response.data;
   const fullImageUrl = `http://dev.trainee.dex-it.ru${imagePath}`;
 
