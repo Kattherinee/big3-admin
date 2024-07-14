@@ -1,9 +1,9 @@
 import axios from "axios";
-import { RegisterUserRequest } from "../dto/AuthorizationDto/RegisterUserRequest";
-import { LoginResult } from "../dto/AuthorizationDto/LoginResult";
-import { ProblemDetails } from "../dto/AuthorizationDto/ProblemDetails";
-import { LoginRequest } from "../dto/AuthorizationDto/LoginRequest";
-import { UnauthorizedResult } from "../dto/AuthorizationDto/UnauthorizedResult";
+import { RegisterUserRequest } from "../../dto/AuthorizationDto/RegisterUserRequest";
+import { LoginResult } from "../../dto/AuthorizationDto/LoginResult";
+import { ProblemDetails } from "../../dto/AuthorizationDto/ProblemDetails";
+import { LoginRequest } from "../../dto/AuthorizationDto/LoginRequest";
+import { UnauthorizedResult } from "../../dto/AuthorizationDto/UnauthorizedResult";
 
 const baseRequest = axios.create({
   baseURL: "http://dev.trainee.dex-it.ru",

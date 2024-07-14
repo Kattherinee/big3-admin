@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TeamDto } from "../../../api/dto/TeamsDtos/TeamDto";
 import { fetchTeams } from "../teamsThunks/fetchTeamsThunk";
+import { addTeamThunk } from "../teamsThunks/addTeamThunk";
 
 const teamsSlice = createSlice({
   name: "teams",
@@ -28,6 +29,18 @@ const teamsSlice = createSlice({
       .addCase(fetchTeams.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload as string;
+      })
+      .addCase(addTeamThunk.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data.push(action.payload);
+        state.count += 1;
+      })
+      .addCase(addTeamThunk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(addTeamThunk.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload?.message || null;
       });
   },
 });

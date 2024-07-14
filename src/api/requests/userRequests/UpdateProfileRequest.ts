@@ -1,7 +1,7 @@
-import { ChangeUserRequest } from "../dto/AuthorizationDto/ChangeUserRequest";
-import baseRequest from "../baseRequest";
+import { ChangeUserRequest } from "../../dto/AuthorizationDto/ChangeUserRequest";
+import baseRequest from "../../baseRequest";
 
-import { ProblemDetails } from "../dto/AuthorizationDto/ProblemDetails";
+import { ProblemDetails } from "../../dto/AuthorizationDto/ProblemDetails";
 
 export const updateUserProfile = (data: ChangeUserRequest, token: string) => {
   return baseRequest

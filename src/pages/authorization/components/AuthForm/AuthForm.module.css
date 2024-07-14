@@ -1,84 +1,79 @@
-.container{
-display: flex;
-	height: 100vh;
-	width: 100vw;
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
-.error-section{
-		flex: 57%;
+.error-section {
+  flex: 57%;
 }
-.form-section{
-	flex: 43%;
+.form-section {
+  flex: 43%;
 }
-.formContainer{
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	text-align: center;
-}
-
-.form{
-	padding-top: 32px;
-
-}
-.input{
-padding-bottom: 24px;
-	display: flex;
-	flex-direction: column;
-	align-items: baseline;
+.formContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
 }
 
-.error.input{
-	padding-bottom: 0px;
+.form {
+  padding-top: 32px;
 }
- label{
-	color: var(--grey);
-	padding-bottom: 8px;
-}
-
-.check{
-	display: flex;
- flex-direction: column;
- align-items: baseline;
+.input {
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 }
 
-.check input{
-	color: var(--grey)
+.error.input {
+  padding-bottom: 0px;
+}
+label {
+  color: var(--grey);
+  padding-bottom: 8px;
 }
 
-
-.signIn{
-	display: none;
+.check {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 }
 
+.check input {
+  color: var(--grey);
+}
+
+.signIn {
+  display: none;
+}
 
 .errorMessage {
-	color: var(--lightest-red);
-	font-size: 12px;
-	margin-top: 2px;
+  color: var(--lightest-red);
+  font-size: 12px;
+  margin-top: 2px;
 }
 
-.button{
-	margin-top: 24px;
+.button {
+  margin-top: 24px;
 }
-.error.button{
-	margin-top: 20px;
+.error.button {
+  margin-top: 20px;
 }
 .serverError {
-	color: var(--lightest-red);
-	font-size: 12px;
-	margin-top: 2px;
-	padding-bottom: 12px;
-	/* Для изменения padding при ошибке */
+  color: var(--lightest-red);
+  font-size: 12px;
+  margin-top: 2px;
+  padding-bottom: 12px;
 }
-@media (max-width:756px) {
-	label{
-		font-size: 17px;
-	}
-	.text{
-		font-size: 15px;
-	}
-	.password{
-		padding-bottom: 34px;
-	}
+@media (max-width: 756px) {
+  label {
+    font-size: 17px;
+  }
+  .text {
+    font-size: 15px;
+  }
+  .password {
+    padding-bottom: 34px;
+  }
 }
-

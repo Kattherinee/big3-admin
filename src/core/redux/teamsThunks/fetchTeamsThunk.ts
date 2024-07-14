@@ -1,4 +1,4 @@
-import { fetchTeamRequest } from "../../../api/requests/FetchTeamsRequest";
+import { fetchTeamRequest } from "../../../api/requests/teamsRequests/FetchTeamsRequest";
 import { RootState } from "../store/store";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { TeamDtoPageResult } from "../../../api/dto/TeamsDtos/TeamDtoPageResult";

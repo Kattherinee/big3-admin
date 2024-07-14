@@ -42,6 +42,15 @@
   color: var(--red-default);
 }
 
+.error.input {
+  padding-bottom: 0px;
+}
+.error {
+  color: var(--lightest-red);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
 @media (max-width: 1286px) {
   .container {
     flex-direction: column;

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { updateUserProfile } from "../../../api/requests/UpdateProfileRequest";
+import { updateUserProfile } from "../../../api/requests/userRequests/UpdateProfileRequest";
 import { RootState } from "../store/store";
 
 export const updateProfile = createAsyncThunk(
@@ -25,6 +25,7 @@ export const updateProfile = createAsyncThunk(
     } catch (error: any) {
       return rejectWithValue({
         status: error.response?.status,
+
         message: error.message,
       });
     }

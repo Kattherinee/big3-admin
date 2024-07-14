@@ -1,3 +1,10 @@
+/* Remove spinner (up/down arrows) in Chrome */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .inputContainer {
   position: relative;
   display: flex;
@@ -32,9 +39,7 @@
   right: 10px;
   cursor: pointer;
   width: 16px;
-  /* Adjust size as needed */
   height: 16px;
-  /* Adjust size as needed */
 }
 .errorContainer .input {
   border: 1px solid var(--lightest-red);

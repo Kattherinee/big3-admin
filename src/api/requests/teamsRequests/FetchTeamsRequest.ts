@@ -1,6 +1,6 @@
-import baseRequest from "../baseRequest";
-import { TeamDtoPageResult } from "../dto/TeamsDtos/TeamDtoPageResult";
-import { ProblemDetails } from "../dto/AuthorizationDto/ProblemDetails";
+import baseRequest from "../../baseRequest";
+import { TeamDtoPageResult } from "../../dto/TeamsDtos/TeamDtoPageResult";
+import { ProblemDetails } from "../../dto/AuthorizationDto/ProblemDetails";
 
 export const fetchTeamRequest = (
   page: number,

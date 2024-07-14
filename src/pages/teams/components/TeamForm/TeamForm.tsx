@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { AppDispatch } from "../../../../core/redux/store/store";
 import { RootState } from "../../../../core/redux/store/store";
 import styles from "./TeamForm.module.css";
@@ -10,18 +11,28 @@ import ImageUpload from "../../../../components/ImageUpload/ImageUpload";
 import cn from "classnames";
 import { uploadImage } from "../../../../api/requests/uploadImageRequest";
 import Breadcrumbs from "../../../../components/BreadCrumbs/BreadCrumbs";
+import { addTeamThunk } from "../../../../core/redux/teamsThunks/addTeamThunk";
+
+interface FormValues {
+  name: string;
+  foundationYear: number;
+  division: string;
+  conference: string;
+}
 
 const TeamForm: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const token = useSelector((s: RootState) => s.user.token) || "";
-  const [teamName, setTeamName] = useState<string>("");
-  const [foundationYear, setFoundationYear] = useState<number>(0);
-  const [division, setDivision] = useState<string>("");
-  const [conference, setConference] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
 
   const handleAvatarChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -42,18 +53,18 @@ const TeamForm: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       console.log("Submitting new team with:", {
-        teamName,
-        foundationYear,
-        division,
-        conference,
+        ...data,
         imageUrl,
       });
-      // Here you would dispatch an action to save the team
+      await dispatch(
+        addTeamThunk({
+          ...data,
+          imageUrl,
+        })
+      );
       navigate("/teams");
     } catch (error) {
       console.error("Failed to add team:", error);
@@ -62,7 +73,7 @@ const TeamForm: React.FC = () => {
 
   return (
     <>
-      <form className={styles.container} onSubmit={handleSubmit}>
+      <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.breadcrumbs}>
           <Breadcrumbs />
         </div>
@@ -78,9 +89,12 @@ const TeamForm: React.FC = () => {
               </label>
               <InputField
                 type="text"
-                // value={teamName}
-                onChange={(e) => setTeamName(e.target.value)}
+                {...register("name", { required: "Required" })}
+                error={!!errors.name}
               />
+              {errors.name && (
+                <p className={styles.error}>{errors.name.message}</p>
+              )}
             </div>
             <div className={styles.input}>
               <label className={styles["label-iput"]} htmlFor="division">
@@ -88,9 +102,12 @@ const TeamForm: React.FC = () => {
               </label>
               <InputField
                 type="text"
-                // value={division}
-                onChange={(e) => setDivision(e.target.value)}
+                {...register("division", { required: "Required" })}
+                error={!!errors.division}
               />
+              {errors.division && (
+                <p className={styles.error}>{errors.division.message}</p>
+              )}
             </div>
             <div className={styles.input}>
               <label className={styles["label-iput"]} htmlFor="conference">
@@ -98,19 +115,28 @@ const TeamForm: React.FC = () => {
               </label>
               <InputField
                 type="text"
-                // value={conference}
-                onChange={(e) => setConference(e.target.value)}
+                {...register("conference", { required: "Required" })}
+                error={!!errors.conference}
               />
+              {errors.conference && (
+                <p className={styles.error}>{errors.conference.message}</p>
+              )}
             </div>
             <div className={styles.input}>
               <label className={styles["label-iput"]} htmlFor="foundationYear">
                 Foundation Year
               </label>
               <InputField
-                type="text"
-                // value={foundationYear}
-                onChange={(e) => setFoundationYear(Number(e.target.value))}
+                type="number"
+                {...register("foundationYear", {
+                  required: "Required",
+                  valueAsNumber: true,
+                })}
+                error={!!errors.foundationYear}
               />
+              {errors.foundationYear && (
+                <p className={styles.error}>{errors.foundationYear.message}</p>
+              )}
             </div>
           </div>
           <div className={styles.buttons}>
