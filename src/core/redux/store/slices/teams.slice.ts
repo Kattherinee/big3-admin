@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TeamDto } from "../../../api/dto/TeamsDtos/TeamDto";
-import { fetchTeams } from "../teamsThunks/fetchTeamsThunk";
-import { addTeamThunk } from "../teamsThunks/addTeamThunk";
+import { TeamDto } from "../../../../api/dto/TeamsDtos/TeamDto";
+import { fetchTeams } from "../../teamsThunks/fetchTeamsThunk";
+import { addTeamThunk } from "../../teamsThunks/addTeamThunk";
 
 const teamsSlice = createSlice({
   name: "teams",

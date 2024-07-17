@@ -1,35 +1,75 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../../core/redux/store/store";
 import Search from "../../../ui/search/Search";
 import Button from "../../../ui/Button/Button";
 import { Select, SelectOption } from "../../../ui/Multiselect/Multiselect";
 import styles from "./PlayersPage.module.css";
 import PlayerCard from "../components/PlayerCard/PlayerCard";
-
-const options = [
-  { name: "Denver Nuggets", id: 1098 },
-  { name: "Portland trail blazers", id: 1011 },
-  { name: "Minnesota timberwolves", id: 1023 },
-  { name: "Philadelphia", id: 1021 },
-];
+import { fetchPlayers } from "../../../core/redux/playersThunks/fetchPlayersThunk";
+import { useNavigate } from "react-router-dom";
+import cn from "classnames";
 
 export const PlayersPage: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { data: players, status } = useSelector(
+    (state: RootState) => state.players
+  );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchPlayers({ name: "", page: 1, pageSize: 6 }));
+  }, [dispatch]);
+
   const [value, setValue] = useState<SelectOption[] | undefined>();
+
+  const playerOptions: SelectOption[] = players.map((player) => ({
+    name: player.name,
+    id: player.id,
+  }));
+
   return (
     <>
-      <div className={styles.container}>
+      <div className={cn(styles.container)}>
         <main className={styles.main}>
           <div className={styles.head}>
             <Search />
             <Select
               multiple
-              options={options}
+              options={playerOptions}
               value={value}
               onChange={(o) => setValue(o)}
             />
-            <Button appearence="add">Add +</Button>
+            <Button
+              appearence="add"
+              onClick={() => navigate("/players/add_new_player")}
+            >
+              Add +
+            </Button>
           </div>
-          <div className={styles.cards}>
-            <PlayerCard />
+          <div
+            className={cn(
+              styles.cards,
+              players.length === 0 ? styles.empty : ""
+            )}
+          >
+            {status === "loading" && <p>Loading...</p>}
+            {status === "succeeded" &&
+              players.map((player) => (
+                <PlayerCard key={player.id} player={player} />
+              ))}
+            {status === "succeeded" && players.length === 0 && (
+              <div className={styles.emptyPage}>
+                <img
+                  src="/src/assets/images/emptyHere.png"
+                  alt="Play BasketBall)"
+                />
+                <div className={styles.headText}>Empty here</div>
+                <div className={styles.text}>Add new teams to continue</div>
+              </div>
+            )}
+            {status === "failed" && <p>Failed to load teams</p>}
           </div>
         </main>
       </div>

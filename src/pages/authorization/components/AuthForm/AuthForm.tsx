@@ -12,7 +12,7 @@ import {
   registry,
   authorize,
   selectUser,
-} from "../../../../core/redux/store/user.slice";
+} from "../../../../core/redux/store/slices/user.slice";
 import ServerError from "../../../../ui/ServerError/ServerError";
 
 interface IAuthFormProps {

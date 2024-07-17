@@ -1,17 +1,30 @@
 import React from "react";
 import styles from "./PlayerCard.module.css";
-// import { Team } from "../../../Team";
+import { PlayerDto } from "../../../../api/dto/PlayersDtos/PlayerDto";
+import { getTeamNameById } from "../../../../core/redux/teamsThunks/fetchTeamsThunk";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../core/redux/store/store";
 
-// interface TeamCardprops {
-//   team: Team;
-// }
+interface PlayerCardProps {
+  player: PlayerDto;
+}
 
-const PlayerCard: React.FC = () => {
+const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
+  const teams = useSelector((state: RootState) => state.teams.data);
+  const teamsLoading = useSelector(
+    (state: RootState) => state.teams.status === "loading"
+  );
+  const placeholderImage = "path/to/placeholder/image.png";
+
+  const teamName = teamsLoading
+    ? "Loading..."
+    : getTeamNameById(player.team, teams);
+
   return (
     <div className={styles.card}>
       <div className={styles.head}>
         <img
-          src="src\assets\images\photo.png"
+          src={player.avatarUrl || placeholderImage}
           alt="player's photo"
           className={styles.logo}
         />
@@ -19,9 +32,9 @@ const PlayerCard: React.FC = () => {
 
       <div className={styles.details}>
         <span className={styles.name}>
-          Jaylen Adams <span className={styles.number}>#10</span>
+          {player.name} <span className={styles.number}>#{player.number}</span>
         </span>
-        <span className={styles.year}>Portland trail blazers</span>
+        <span className={styles.team}>{teamName}</span>
       </div>
     </div>
   );

@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./user.slice";
-import teamsSlice from "./teams.slice";
+import userSlice from "./slices/user.slice";
+import teamsSlice from "./slices/teams.slice";
 import { saveState } from "./storage";
-import { TOKEN_PERSISTENT_STATE } from "./user.slice";
+import { TOKEN_PERSISTENT_STATE } from "./slices/user.slice";
+import playerSlice from "./slices/player.slice";
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
     teams: teamsSlice,
+    players: playerSlice,
   },
 });
 

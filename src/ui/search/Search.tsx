@@ -12,7 +12,6 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   const handleSearch = () => {
     if (query.trim()) {
       console.log(`Searching for: ${query}`);
-      // Ваша логика поиска
     }
   };
 

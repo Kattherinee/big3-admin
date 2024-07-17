@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loadState, saveState } from "./storage";
+import { loadState, saveState } from "../storage";
 import {
   loginUser,
   registerUser,
-} from "../../../api/requests/userRequests/authorization";
-import { updateProfile } from "../user.thunks/updateProfileThunk";
-import { RootState } from "./store";
+} from "../../../../api/requests/userRequests/authorization";
+import { updateProfile } from "../../user.thunks/updateProfileThunk";
+import { RootState } from "../store";
 
 export const TOKEN_PERSISTENT_STATE = "userData";
 

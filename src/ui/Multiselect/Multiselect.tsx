@@ -22,6 +22,7 @@ interface SingleSelectProps {
 type SelectProps = {
   options: SelectOption[];
   placeholder?: string;
+  error?: boolean;
 } & (MultiSelectProps | SingleSelectProps);
 
 export function Select({
@@ -30,6 +31,7 @@ export function Select({
   onChange,
   options,
   placeholder,
+  error,
 }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);

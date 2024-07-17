@@ -2,6 +2,13 @@
   display: flex;
 }
 
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .main {
   flex: 1;
 }
@@ -14,7 +21,53 @@
   margin: 25px 0;
 }
 
+.emptyPage {
+  background-color: var(--white);
+  width: 516px;
+  height: 530px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 15px;
+  justify-content: center;
+}
+
+.headText {
+  font-family: "Avenir-Black";
+  font-size: 36px;
+  color: var(--lightest-red);
+  margin-top: 48px;
+}
+
+.text {
+  font-family: "Avenir-Book";
+  font-size: 24px;
+  color: var(--grey);
+  margin-top: 24px;
+}
+
+@media (max-width: 1080px) {
+  .emptyPage {
+    height: 474px;
+    width: 453px;
+  }
+  .headText {
+    font-size: 30px;
+  }
+  .emptyPage img {
+    width: 359px;
+    height: 245px;
+  }
+  .text {
+    font-size: 20px;
+  }
+}
+
 @media (max-width: 767px) {
+  .empty {
+    align-items: baseline;
+  }
   .sidebarPlaceholder {
     width: 0;
   }
@@ -29,6 +82,28 @@
     align-items: center;
     gap: 16px;
   }
-}
-@media (max-hight: 900px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .emptyPage {
+    height: 434px;
+    width: 100%;
+    border-radius: 0%;
+  }
+  .headText {
+    font-size: 18px;
+  }
+  .emptyPage img {
+    width: 339px;
+    height: 225px;
+  }
+  .text {
+    margin-top: 16px;
+    font-size: 15px;
+  }
 }

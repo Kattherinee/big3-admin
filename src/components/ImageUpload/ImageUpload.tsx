@@ -6,12 +6,15 @@ interface ImageUploadProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ avatarUrl, onChange }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({
+  avatarUrl: photoUrl,
+  onChange,
+}) => {
   return (
     <div className={styles["avatar-cover"]}>
       <label htmlFor="avatarUpload" className={styles.avatar}>
         <img
-          src={avatarUrl || "/src/assets/images/Rectangle 207.png"}
+          src={photoUrl || "/src/assets/images/Rectangle 207.png"}
           alt="Avatar Preview"
           className={styles.avatar}
         />

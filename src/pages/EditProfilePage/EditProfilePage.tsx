@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../core/redux/store/store";
-import { selectUser } from "../../core/redux/store/user.slice";
+import { selectUser } from "../../core/redux/store/slices/user.slice";
 import { updateProfile } from "../../core/redux/user.thunks/updateProfileThunk";
 import { uploadImage } from "../../api/requests/uploadImageRequest";
 import { RootState } from "../../core/redux/store/store";

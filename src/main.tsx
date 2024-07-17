@@ -14,6 +14,7 @@ import { RequireAuth } from "./api/helpers/RequireAuth.tsx";
 import { store } from "./core/redux/store/store.ts";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage.tsx";
 import TeamForm from "./pages/teams/components/TeamForm/TeamForm.tsx";
+import PlayerForm from "./pages/players/components/PlayerForm/PlayerForm.tsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "players",
         element: <PlayersPage />,
+      },
+      {
+        path: "players/add_new_player",
+        element: <PlayerForm />,
       },
       {
         path: "editProfile",

@@ -1,15 +1,15 @@
 import baseRequest from "../../baseRequest";
-import { TeamDtoPageResult } from "../../dto/TeamsDtos/TeamDtoPageResult";
+import { PlayerDtoPageResult } from "../../dto/PlayersDtos/PlayerDtoPageResult";
 import { ProblemDetails } from "../../dto/AuthorizationDto/ProblemDetails";
 
-export const fetchTeamRequest = (
+export const fetchPlayersRequest = (
   name: string,
   page: number,
   pageSize: number,
   token: string
 ) => {
   return baseRequest
-    .get<TeamDtoPageResult>("/api/Team/GetTeams", {
+    .get<PlayerDtoPageResult>("/api/Player/GetPlayers", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

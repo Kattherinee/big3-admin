@@ -1,5 +1,4 @@
-// TeamsPage.tsx
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Search from "../../../ui/search/Search";
 import Button from "../../../ui/Button/Button";
 import TeamCard from "../components/TeamsCard/TeamCard";
@@ -8,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTeams } from "../../../core/redux/teamsThunks/fetchTeamsThunk";
 import styles from "./TeamsPage.module.css";
 import { useNavigate } from "react-router-dom";
+import cn from "classnames";
 
 export const TeamsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,7 +16,7 @@ export const TeamsPage: React.FC = () => {
   );
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(fetchTeams({ page: 1, pageSize: 6 }));
+    dispatch(fetchTeams({ name: "", page: 1, pageSize: 6 }));
   }, [dispatch]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const TeamsPage: React.FC = () => {
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={cn(styles.container)}>
         <main className={styles.main}>
           <div className={styles.head}>
             <Search />
@@ -36,12 +36,21 @@ export const TeamsPage: React.FC = () => {
               Add +
             </Button>
           </div>
-          <div className={styles.cards}>
+          <div
+            className={cn(styles.cards, teams.length === 0 ? styles.empty : "")}
+          >
             {status === "loading" && <p>Loading...</p>}
             {status === "succeeded" &&
               teams.map((team) => <TeamCard key={team.id} team={team} />)}
             {status === "succeeded" && teams.length === 0 && (
-              <p>No teams found</p>
+              <div className={styles.emptyPage}>
+                <img
+                  src="/src/assets/images/emptyHere.png"
+                  alt="Play BasketBall)"
+                />
+                <div className={styles.headText}>Empty here</div>
+                <div className={styles.text}>Add new teams to continue</div>
+              </div>
             )}
             {status === "failed" && <p>Failed to load teams</p>}
           </div>

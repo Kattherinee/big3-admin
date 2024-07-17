@@ -4,7 +4,10 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../core/redux/store/store";
-import { selectUser, userActions } from "../../core/redux/store/user.slice";
+import {
+  selectUser,
+  userActions,
+} from "../../core/redux/store/slices/user.slice";
 
 const Header: React.FC = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<boolean>(false);

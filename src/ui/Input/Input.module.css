@@ -1,8 +1,28 @@
-/* Remove spinner (up/down arrows) in Chrome */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.input[type="date"]::placeholder {
+  color: transparent;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(78%);
+  margin-right: 12px;
+  font-size: 16px;
+}
+
+.input[type="date"]::-webkit-datetime-edit-month-field:focus,
+.input[type="date"]::-webkit-datetime-edit-day-field:focus,
+.input[type="date"]::-webkit-datetime-edit-year-field:focus {
+  background: var(--lightest-grey);
+  color: var(--text);
+}
+
+.input[type="date"]::-ms-clear {
+  display: none;
 }
 
 .inputContainer {
@@ -10,6 +30,7 @@ input[type="number"]::-webkit-inner-spin-button {
   display: flex;
   align-items: center;
 }
+
 .input {
   width: 354px;
   height: 40px;
@@ -21,6 +42,7 @@ input[type="number"]::-webkit-inner-spin-button {
   padding-inline: 0;
   padding-left: 12px;
 }
+
 .input:hover {
   background: var(--lightest-grey);
 }
@@ -30,6 +52,7 @@ input[type="number"]::-webkit-inner-spin-button {
   box-shadow: 0px 0px 5px #d9d9d9;
   outline: none;
 }
+
 .input:disabled {
   color: var(--lightest-grey);
 }
@@ -41,9 +64,11 @@ input[type="number"]::-webkit-inner-spin-button {
   width: 16px;
   height: 16px;
 }
+
 .errorContainer .input {
   border: 1px solid var(--lightest-red);
 }
+
 .errorContainer .input:focus {
   box-shadow: 0px 0px 4px var(--lightest-red);
 }
@@ -53,6 +78,7 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 331px;
   }
 }
+
 @media (max-width: 767px) {
   .input {
     width: 315px;

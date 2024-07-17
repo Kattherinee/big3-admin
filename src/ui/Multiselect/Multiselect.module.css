@@ -18,6 +18,12 @@
   overflow: hidden;
   white-space: nowrap;
 }
+.placeholder {
+  color: var(--grey);
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 2px;
+}
 
 .clear-btn {
   background: none;
@@ -96,6 +102,10 @@
 .option.selected {
   background-color: var(--dark-red);
   color: var(--white);
+}
+
+.search::placeholder {
+  color: var(--grey);
 }
 @media (max-width: 1080px) {
   .container {

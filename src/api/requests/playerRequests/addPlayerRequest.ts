@@ -1,24 +1,16 @@
 import baseRequest from "../../baseRequest";
-import { TeamDtoPageResult } from "../../dto/TeamsDtos/TeamDtoPageResult";
+import { PlayerDto } from "../../dto/PlayersDtos/PlayerDto";
 import { ProblemDetails } from "../../dto/AuthorizationDto/ProblemDetails";
+import { NewPlayerDto } from "../../dto/PlayersDtos/NewPlayerDto";
 
-export const fetchTeamRequest = (
-  name: string,
-  page: number,
-  pageSize: number,
-  token: string
-) => {
+export const addPlayerRequest = (data: NewPlayerDto, token: string) => {
   return baseRequest
-    .get<TeamDtoPageResult>("/api/Team/GetTeams", {
+    .post<PlayerDto>("/api/Player/Add", data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      params: {
-        name,
-        page,
-        pageSize,
-      },
     })
+    .then((response) => response.data)
     .catch((error) => {
       const response = error.response;
       if (response && response.data) {
