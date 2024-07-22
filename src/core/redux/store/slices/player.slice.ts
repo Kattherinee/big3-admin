@@ -3,6 +3,10 @@ import { PlayerDto } from "../../../../api/dto/PlayersDtos/PlayerDto";
 import { fetchPlayers } from "../../playersThunks/fetchPlayersThunk";
 import { addPlayerThunk } from "../../playersThunks/addPlayerThunk";
 import { getPositionsThunk } from "../../playersThunks/getPositionsThunk";
+import { getPlayerThunk } from "../../playersThunks/getPlayerThunk";
+import { updatePlayerThunk } from "../../playersThunks/updatePlayerThunk";
+import { deletePlayerThunk } from "../../playersThunks/deletePlayerThunk";
+import { PlayerTeamNameDto } from "../../../../api/dto/PlayersDtos/PlayerTeamNameDto";
 
 interface PlayerState {
   data: PlayerDto[];
@@ -14,6 +18,9 @@ interface PlayerState {
   positions: string[];
   positionsStatus: string;
   positionsError: string | null;
+  currentPlayer: PlayerTeamNameDto | null;
+  currentPlayerStatus: string;
+  currentPlayerError: string | null;
 }
 
 const initialState: PlayerState = {
@@ -26,9 +33,13 @@ const initialState: PlayerState = {
   positions: [],
   positionsStatus: "idle",
   positionsError: null,
+  currentPlayer: null,
+  currentPlayerStatus: "idle",
+  currentPlayerError: null,
 };
+
 const playerSlice = createSlice({
-  name: "player",
+  name: "players",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -59,7 +70,36 @@ const playerSlice = createSlice({
         state.status = "failed";
         state.error = action.payload?.message || null;
       })
-
+      .addCase(updatePlayerThunk.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const index = state.data.findIndex(
+          (player) => player.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.data[index] = action.payload;
+        }
+      })
+      .addCase(updatePlayerThunk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updatePlayerThunk.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload?.message || null;
+      })
+      .addCase(deletePlayerThunk.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = state.data.filter(
+          (player) => player.id !== action.payload.id
+        );
+        state.count -= 1;
+      })
+      .addCase(deletePlayerThunk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deletePlayerThunk.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload?.message || null;
+      })
       .addCase(getPositionsThunk.pending, (state) => {
         state.positionsStatus = "loading";
       })
@@ -71,6 +111,17 @@ const playerSlice = createSlice({
       .addCase(getPositionsThunk.rejected, (state, action) => {
         state.positionsStatus = "failed";
         state.positionsError = action.payload?.message || null;
+      })
+      .addCase(getPlayerThunk.pending, (state) => {
+        state.currentPlayerStatus = "loading";
+      })
+      .addCase(getPlayerThunk.fulfilled, (state, action) => {
+        state.currentPlayerStatus = "succeeded";
+        state.currentPlayer = action.payload;
+      })
+      .addCase(getPlayerThunk.rejected, (state, action) => {
+        state.currentPlayerStatus = "failed";
+        state.currentPlayerError = action.payload as string;
       });
   },
 });

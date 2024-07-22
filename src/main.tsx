@@ -15,6 +15,8 @@ import { store } from "./core/redux/store/store.ts";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage.tsx";
 import TeamForm from "./pages/teams/components/TeamForm/TeamForm.tsx";
 import PlayerForm from "./pages/players/components/PlayerForm/PlayerForm.tsx";
+import { TeamDetail } from "./pages/teams/components/TeamDetail/TeamDetail.tsx";
+import PlayerDetailPage from "./pages/players/components/PlayerDetailPage/PlayerDetailPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,12 +36,25 @@ const router = createBrowserRouter([
         element: <TeamForm />,
       },
       {
+        path: "teams/:id",
+        element: <TeamDetail />,
+      },
+      {
         path: "players",
         element: <PlayersPage />,
       },
       {
         path: "players/add_new_player",
         element: <PlayerForm />,
+      },
+      {
+        path: "/players/edit/:id",
+        element: <PlayerForm />,
+      },
+
+      {
+        path: "players/:id",
+        element: <PlayerDetailPage />,
       },
       {
         path: "editProfile",

@@ -31,6 +31,10 @@
 .inputShort {
   width: 171px;
 }
+.shortContainer {
+  display: flex;
+  gap: 24px;
+}
 
 .buttons {
   display: flex;
@@ -70,14 +74,14 @@
   .container {
     padding: 96px 73px;
   }
+  .inputShort {
+    width: 159px;
+  }
 }
 
 @media (max-width: 756px) {
-  .buttons {
-    gap: 16px;
-  }
   .button {
-    width: 152px;
+    width: 154px;
   }
   .container {
     padding: 96px 73px;

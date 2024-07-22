@@ -2,13 +2,19 @@ import React from "react";
 import { useLocation, Link } from "react-router-dom";
 import styles from "./BreadCrumbs.module.css";
 import { breadcrumbsMap } from "./breadcrumbsMap";
+import { useSelector } from "react-redux";
+import { RootState } from "../../core/redux/store/store";
 
-const BreadСrumbs: React.FC = () => {
+const BreadCrumbs: React.FC = () => {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
   const basePath = pathnames[0];
   const basePathUrl = `/${basePath}`;
+
+  const currentPlayer = useSelector(
+    (state: RootState) => state.players.currentPlayer
+  );
 
   return (
     <nav className={styles.breadcrumbs}>
@@ -17,7 +23,14 @@ const BreadСrumbs: React.FC = () => {
       )}
       {pathnames.slice(1).map((value, index) => {
         const to = `/${pathnames.slice(0, index + 2).join("/")}`;
-        const breadcrumbName = breadcrumbsMap[to] || value;
+        let breadcrumbName = breadcrumbsMap[to] || value;
+
+        if (basePath === "players" && !isNaN(Number(value)) && currentPlayer) {
+          breadcrumbName = currentPlayer.name;
+        }
+        if (basePath === "teams" && !isNaN(Number(value)) && currentPlayer) {
+          breadcrumbName = currentPlayer.name;
+        }
 
         return (
           <React.Fragment key={to}>
@@ -30,4 +43,4 @@ const BreadСrumbs: React.FC = () => {
   );
 };
 
-export default BreadСrumbs;
+export default BreadCrumbs;

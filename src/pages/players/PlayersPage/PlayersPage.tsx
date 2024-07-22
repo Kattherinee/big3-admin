@@ -29,6 +29,10 @@ export const PlayersPage: React.FC = () => {
     id: player.id,
   }));
 
+  const handleCardClick = (id: number) => {
+    navigate(`/players/${id}`);
+  };
+
   return (
     <>
       <div className={cn(styles.container)}>
@@ -39,6 +43,7 @@ export const PlayersPage: React.FC = () => {
               multiple
               options={playerOptions}
               value={value}
+              placeholder="Select..."
               onChange={(o) => setValue(o)}
             />
             <Button
@@ -57,7 +62,11 @@ export const PlayersPage: React.FC = () => {
             {status === "loading" && <p>Loading...</p>}
             {status === "succeeded" &&
               players.map((player) => (
-                <PlayerCard key={player.id} player={player} />
+                <PlayerCard
+                  key={player.id}
+                  player={player}
+                  onClick={() => handleCardClick(player.id)}
+                />
               ))}
             {status === "succeeded" && players.length === 0 && (
               <div className={styles.emptyPage}>

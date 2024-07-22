@@ -1,0 +1,128 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  display: flex;
+  height: 69px;
+  justify-content: space-between;
+  border: 0.5px solid var(--light-grey);
+  align-items: center;
+  padding: 0 32px;
+  border-radius: 10px 10px 0 0;
+  background-color: var(--white);
+}
+.icons {
+  display: flex;
+  gap: 16px;
+}
+.icons img {
+  width: 24px;
+}
+
+.details {
+  background: linear-gradient(276.45deg, #393939 0%, #707070 100.28%);
+  display: flex;
+  border-radius: 0 0 10px 10px;
+  height: 525px;
+}
+.avatarContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.avatarContainer img {
+  width: 90%;
+
+  object-fit: contain;
+  bottom: 0;
+  position: absolute;
+}
+.infoContainer {
+  display: flex;
+  flex: 1;
+  color: var(--white);
+  font-size: 18px;
+  flex-direction: column;
+  margin: 65px 0;
+}
+.name {
+  font-family: "Avenir-Black";
+  font-size: 36px;
+
+  margin-bottom: 40px;
+}
+.name span {
+  color: var(--light-red);
+}
+.shorts {
+  display: flex;
+  gap: 180px;
+  margin-bottom: 54px;
+}
+.infoHead {
+  font-family: "Avenir-Black";
+  font-size: 24px;
+  margin: 0;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 1080px) {
+  .details {
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 0;
+  }
+  .avatarContainer img {
+    width: 143px;
+    object-fit: fill;
+    bottom: none;
+    position: static;
+  }
+  .shorts {
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 32px;
+    align-items: center;
+
+    justify-content: center;
+  }
+  .avatarContainer {
+    position: static;
+  }
+  .name {
+    font-size: 24px;
+  }
+  .infoHead {
+    font-size: 22px;
+  }
+  .info {
+    align-items: center;
+  }
+}
+@media (max-width: 756px) {
+  .name {
+    font-size: 17px;
+  }
+  .infoHead {
+    font-size: 17px;
+  }
+
+  .infoContainer {
+    font-size: 15px;
+  }
+  .header {
+    border-radius: 0;
+  }
+  .details {
+    border-radius: 0;
+  }
+}

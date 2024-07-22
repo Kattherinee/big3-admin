@@ -116,7 +116,7 @@ export function Select({
                 >
                   {v.name}
                   <img
-                    src="src/assets/icon/close_24px.svg"
+                    src="/src/assets/icon/close_24px.svg"
                     alt="&times;"
                     className={styles["remove-btn"]}
                   />
@@ -145,7 +145,7 @@ export function Select({
 
       <div className={styles.divider}></div>
       <div className={styles.caret}>
-        <img src="src/assets/icon/expand_more_24px.svg" alt="▼" />
+        <img src="/src/assets/icon/expand_more_24px.svg" alt="▼" />
       </div>
 
       {isOpen && (

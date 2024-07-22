@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { AppDispatch } from "../../../../core/redux/store/store";
 import { RootState } from "../../../../core/redux/store/store";
@@ -12,9 +12,11 @@ import cn from "classnames";
 import { uploadImage } from "../../../../api/requests/uploadImageRequest";
 import Breadcrumbs from "../../../../components/BreadCrumbs/BreadCrumbs";
 import { addPlayerThunk } from "../../../../core/redux/playersThunks/addPlayerThunk";
+import { updatePlayerThunk } from "../../../../core/redux/playersThunks/updatePlayerThunk";
 import { Select, SelectOption } from "../../../../ui/Multiselect/Multiselect";
 import { getPositionsThunk } from "../../../../core/redux/playersThunks/getPositionsThunk";
 import { fetchTeams } from "../../../../core/redux/teamsThunks/fetchTeamsThunk";
+import { getPlayerThunk } from "../../../../core/redux/playersThunks/getPlayerThunk";
 
 interface FormValues {
   name: string;
@@ -27,10 +29,17 @@ interface FormValues {
 }
 
 const PlayerForm: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
   const token = useSelector((s: RootState) => s.user.token) || "";
   const positions = useSelector((state: RootState) => state.players.positions);
   const teams = useSelector((state: RootState) => state.teams.data);
+  const currentPlayer = useSelector(
+    (state: RootState) => state.players.currentPlayer
+  );
+  const currentPlayerStatus = useSelector(
+    (state: RootState) => state.players.currentPlayerStatus
+  );
   const [avatarUrl, setAvatarUrl] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -46,12 +55,37 @@ const PlayerForm: React.FC = () => {
     handleSubmit,
     formState: { errors },
     control,
+    setValue,
   } = useForm<FormValues>();
 
   useEffect(() => {
     dispatch(getPositionsThunk());
     dispatch(fetchTeams({ name: "", page: 1, pageSize: 100 }));
-  }, [dispatch]);
+
+    if (id) {
+      dispatch(getPlayerThunk({ id: parseInt(id) }));
+    }
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (currentPlayer && id) {
+      setValue("name", currentPlayer.name);
+      setValue("position", currentPlayer.position);
+      setValue("team", currentPlayer.team);
+      setValue("birthday", formatDate(currentPlayer.birthday));
+      setValue("height", currentPlayer.height);
+      setValue("weight", currentPlayer.weight);
+      setValue("num", currentPlayer.number);
+      setAvatarUrl(currentPlayer.avatarUrl);
+
+      setSelectedPosition(
+        positionOptions.find((option) => option.name === currentPlayer.position)
+      );
+      setSelectedTeam(
+        teamOptions.find((option) => option.id === currentPlayer.team)
+      );
+    }
+  }, [currentPlayer, id, setValue]);
 
   const handleAvatarChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -76,17 +110,22 @@ const PlayerForm: React.FC = () => {
     try {
       const { num, ...rest } = data;
 
-      await dispatch(
-        addPlayerThunk({
-          ...rest,
-          number: num,
-          avatarUrl,
-          position: selectedPosition?.name || "",
-          team: selectedTeam?.id || 0,
-        })
-      );
+      const playerData = {
+        ...rest,
+        number: num,
+        avatarUrl,
+        position: selectedPosition?.name || "",
+        team: selectedTeam?.id || 0,
+      };
+
+      if (id) {
+        await dispatch(updatePlayerThunk({ id: parseInt(id), ...playerData }));
+      } else {
+        await dispatch(addPlayerThunk(playerData));
+      }
+      navigate("/players");
     } catch (error) {
-      console.error("Failed to add player:", error);
+      console.error("Failed to submit player:", error);
     }
   };
 
@@ -99,6 +138,15 @@ const PlayerForm: React.FC = () => {
     id: team.id,
     name: team.name,
   }));
+
+  if (currentPlayerStatus === "loading" && id) {
+    return <p>Loading...</p>;
+  }
+
+  const formatDate = (dateString: string) => {
+    const [month, day, year] = dateString.split("-");
+    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  };
 
   return (
     <>
@@ -136,6 +184,7 @@ const PlayerForm: React.FC = () => {
                 render={({ field }) => (
                   <Select
                     options={positionOptions}
+                    placeholder="Select..."
                     value={selectedPosition}
                     onChange={(option) => {
                       field.onChange(option?.name);
@@ -160,6 +209,7 @@ const PlayerForm: React.FC = () => {
                   <Select
                     options={teamOptions}
                     value={selectedTeam}
+                    placeholder="Select..."
                     onChange={(option) => {
                       field.onChange(option?.name);
                       setSelectedTeam(option);
@@ -204,6 +254,8 @@ const PlayerForm: React.FC = () => {
                   <p className={styles.error}>{errors.weight.message}</p>
                 )}
               </div>
+            </div>
+            <div className={styles.shortContainer}>
               <div className={styles.inputShort}>
                 <label className={styles["label-input"]} htmlFor="birthday">
                   Birthday
@@ -219,6 +271,7 @@ const PlayerForm: React.FC = () => {
                   <p className={styles.error}>{errors.birthday.message}</p>
                 )}
               </div>
+
               <div className={styles.inputShort}>
                 <label className={styles["label-input"]} htmlFor="num">
                   Number
@@ -240,7 +293,7 @@ const PlayerForm: React.FC = () => {
           <div className={styles.buttons}>
             <Button
               appearence="cancel"
-              onClick={() => navigate("/teams")}
+              onClick={() => navigate("/players")}
               className={styles.button}
               type="button"
             >
@@ -252,7 +305,7 @@ const PlayerForm: React.FC = () => {
               className={cn(styles.button, styles["save-btn"])}
               type="submit"
             >
-              Save
+              {id ? "Update" : "Save"}
             </Button>
             {isUploading && (
               <p className={styles.uploadingMessage}>Uploading...</p>

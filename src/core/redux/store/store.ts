@@ -14,7 +14,8 @@ export const store = configureStore({
 });
 
 store.subscribe(() => {
-  saveState({ token: store.getState().user.token }, TOKEN_PERSISTENT_STATE);
+  const { token, userName, avatarUrl } = store.getState().user;
+  saveState({ token, userName, avatarUrl }, TOKEN_PERSISTENT_STATE);
 });
 
 export type RootState = ReturnType<typeof store.getState>;

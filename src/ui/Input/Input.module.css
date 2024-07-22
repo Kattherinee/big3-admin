@@ -32,7 +32,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .input {
-  width: 354px;
+  width: 366px;
   height: 40px;
   border-radius: 4px;
   background: var(--lightest-grey1);
@@ -40,7 +40,10 @@ input[type="number"]::-webkit-inner-spin-button {
   font-family: "Avenir-Medium";
   padding-block: 0;
   padding-inline: 0;
-  padding-left: 12px;
+  text-indent: 12px; /* Add text indentation */
+}
+.input[type="date"] {
+  text-indent: 10px;
 }
 
 .input:hover {
@@ -75,12 +78,12 @@ input[type="number"]::-webkit-inner-spin-button {
 
 @media (max-width: 1080px) {
   .input {
-    width: 331px;
+    width: 340px;
   }
 }
 
 @media (max-width: 767px) {
   .input {
-    width: 315px;
+    width: 327px;
   }
 }

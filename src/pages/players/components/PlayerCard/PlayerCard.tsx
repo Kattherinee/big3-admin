@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./PlayerCard.module.css";
 import { PlayerDto } from "../../../../api/dto/PlayersDtos/PlayerDto";
 import { getTeamNameById } from "../../../../core/redux/teamsThunks/fetchTeamsThunk";
@@ -7,9 +6,10 @@ import { RootState } from "../../../../core/redux/store/store";
 
 interface PlayerCardProps {
   player: PlayerDto;
+  onClick: () => void;
 }
 
-const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
+const PlayerCard: React.FC<PlayerCardProps> = ({ player, onClick }) => {
   const teams = useSelector((state: RootState) => state.teams.data);
   const teamsLoading = useSelector(
     (state: RootState) => state.teams.status === "loading"
@@ -21,7 +21,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
     : getTeamNameById(player.team, teams);
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <div className={styles.head}>
         <img
           src={player.avatarUrl || placeholderImage}
