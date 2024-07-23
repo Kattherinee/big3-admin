@@ -1,7 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
 import { RootState } from "../store/store";
-
 import { PlayerTeamNameDto } from "../../../api/dto/PlayersDtos/PlayerTeamNameDto";
 import { getPlayerRequest } from "../../../api/requests/playerRequests/getPlayerRequest";
 
@@ -21,6 +19,6 @@ export const getPlayerThunk = createAsyncThunk<
     const response = await getPlayerRequest(id, token);
     return response.data;
   } catch (error: any) {
-    return rejectWithValue(error.message || "Failed to fetch teams");
+    return rejectWithValue(error.message || "Failed to fetch player");
   }
 });

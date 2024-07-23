@@ -2,17 +2,37 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TeamDto } from "../../../../api/dto/TeamsDtos/TeamDto";
 import { fetchTeams } from "../../teamsThunks/fetchTeamsThunk";
 import { addTeamThunk } from "../../teamsThunks/addTeamThunk";
+import { getTeamThunk } from "../../teamsThunks/getTeamThunk";
+import { updateTeamThunk } from "../../teamsThunks/updateTeamThunk";
+import { deleteTeamThunk } from "../../teamsThunks/deleteTeamThunk";
+
+interface TeamState {
+  data: TeamDto[];
+  count: number;
+  page: number;
+  size: number;
+  status: string;
+  error: string | null;
+  currentTeam: TeamDto | null;
+  currentTeamStatus: string;
+  currentTeamError: string | null;
+}
+
+const initialState: TeamState = {
+  data: [],
+  count: 0,
+  page: 1,
+  size: 6,
+  status: "idle",
+  error: null,
+  currentTeam: null,
+  currentTeamStatus: "idle",
+  currentTeamError: null,
+};
 
 const teamsSlice = createSlice({
   name: "teams",
-  initialState: {
-    data: [] as TeamDto[],
-    count: 0,
-    page: 1,
-    size: 6,
-    status: "idle",
-    error: null as string | null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -39,6 +59,45 @@ const teamsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addTeamThunk.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload?.message || null;
+      })
+      .addCase(getTeamThunk.pending, (state) => {
+        state.currentTeamStatus = "loading";
+      })
+      .addCase(getTeamThunk.fulfilled, (state, action) => {
+        state.currentTeamStatus = "succeeded";
+        state.currentTeam = action.payload;
+      })
+      .addCase(getTeamThunk.rejected, (state, action) => {
+        state.currentTeamStatus = "failed";
+        state.currentTeamError = action.payload as string;
+      })
+      .addCase(updateTeamThunk.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const index = state.data.findIndex(
+          (team) => team.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.data[index] = action.payload;
+        }
+      })
+      .addCase(updateTeamThunk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateTeamThunk.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload?.message || null;
+      })
+      .addCase(deleteTeamThunk.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = state.data.filter((team) => team.id !== action.payload.id);
+        state.count -= 1;
+      })
+      .addCase(deleteTeamThunk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteTeamThunk.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload?.message || null;
       });

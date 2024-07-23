@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PlayerDto } from "../../../../api/dto/PlayersDtos/PlayerDto";
-import { fetchPlayers } from "../../playersThunks/fetchPlayersThunk";
+import { fetchPlayersThunk } from "../../playersThunks/fetchPlayersThunk";
 import { addPlayerThunk } from "../../playersThunks/addPlayerThunk";
 import { getPositionsThunk } from "../../playersThunks/getPositionsThunk";
 import { getPlayerThunk } from "../../playersThunks/getPlayerThunk";
@@ -44,17 +44,17 @@ const playerSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPlayers.pending, (state) => {
+      .addCase(fetchPlayersThunk.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchPlayers.fulfilled, (state, action) => {
+      .addCase(fetchPlayersThunk.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = action.payload.data;
         state.count = action.payload.count;
         state.page = action.payload.page;
         state.size = action.payload.size;
       })
-      .addCase(fetchPlayers.rejected, (state, action) => {
+      .addCase(fetchPlayersThunk.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload as string;
       })

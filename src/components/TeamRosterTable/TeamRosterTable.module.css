@@ -1,0 +1,85 @@
+.tableContainer {
+  background-color: white;
+  border: 0.5px solid var(--lightest-grey);
+  border-radius: 10px 10px 0 0;
+}
+
+.header {
+  padding: 14px 32px;
+  border-bottom: 0.5px solid var(--lightest-grey);
+  font-size: 18px;
+  color: var(--grey);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: var(--grey);
+}
+
+.table th,
+.table td {
+  border-bottom: 0.5px solid var(--lightest-grey);
+  padding: 10px 0;
+
+  text-align: left;
+}
+
+.table th {
+  font-weight: normal;
+}
+
+.table td {
+  vertical-align: middle;
+}
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.playerInfo {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.playerDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.playerPosition {
+  font-size: 12px;
+  color: var(--light-grey);
+}
+.table th:nth-child(1),
+.table th:nth-child(2),
+.table td:nth-child(1),
+.table td:nth-child(2) {
+  text-align: left;
+}
+
+.table th:nth-child(3),
+.table th:nth-child(4),
+.table th:nth-child(5),
+.table td:nth-child(3),
+.table td:nth-child(4),
+.table td:nth-child(5) {
+  text-align: center;
+  width: 10%;
+}
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  padding-left: 32px;
+  width: 8%;
+}
+.table th:nth-child(5),
+.table td:nth-child(5) {
+  padding-right: 32px;
+}

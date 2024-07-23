@@ -64,7 +64,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 756px) {
   .empty {
     align-items: baseline;
   }
@@ -89,7 +89,9 @@
     align-items: center;
     width: 100%;
   }
-
+  .empty {
+    justify-content: start;
+  }
   .emptyPage {
     height: 434px;
     width: 100%;

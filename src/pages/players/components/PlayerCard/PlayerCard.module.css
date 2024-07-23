@@ -60,6 +60,6 @@
     height: 150px;
   }
   .card {
-    max-width: 327px;
+    width: 327px;
   }
 }

@@ -5,13 +5,14 @@ import { TeamDto } from "../../../../api/dto/TeamsDtos/TeamDto";
 
 interface TeamCardProps {
   team: TeamDto;
+  onClick: () => void;
 }
 
-const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
+const TeamCard: React.FC<TeamCardProps> = ({ team, onClick }) => {
   const placeholderImage = "path/to/placeholder/image.png"; // Укажите путь к placeholder изображению
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <div className={styles.head}>
         <img
           src={team.imageUrl || placeholderImage}

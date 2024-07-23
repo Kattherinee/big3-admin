@@ -1,10 +1,10 @@
 import baseRequest from "../../baseRequest";
-import { PlayerDto } from "../../dto/PlayersDtos/PlayerDto";
+import { TeamDto } from "../../dto/TeamsDtos/TeamDto";
 import { ProblemDetails } from "../../dto/AuthorizationDto/ProblemDetails";
 
-export const deletePlayerRequest = (id: number, token: string) => {
+export const getTeamRequest = (id: number, token: string) => {
   return baseRequest
-    .delete<PlayerDto>(`/api/Player/Delete`, {
+    .get<TeamDto>("/api/Team/Get", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -12,7 +12,6 @@ export const deletePlayerRequest = (id: number, token: string) => {
         id,
       },
     })
-    .then((response) => response.data)
     .catch((error) => {
       const response = error.response;
       if (response && response.data) {

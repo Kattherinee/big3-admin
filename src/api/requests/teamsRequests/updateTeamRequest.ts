@@ -1,15 +1,12 @@
 import baseRequest from "../../baseRequest";
-import { PlayerDto } from "../../dto/PlayersDtos/PlayerDto";
 import { ProblemDetails } from "../../dto/AuthorizationDto/ProblemDetails";
+import { TeamDto } from "../../dto/TeamsDtos/TeamDto";
 
-export const deletePlayerRequest = (id: number, token: string) => {
+export const updateTeamRequest = (data: TeamDto, token: string) => {
   return baseRequest
-    .delete<PlayerDto>(`/api/Player/Delete`, {
+    .put<TeamDto>("/api/Team/Update", data, {
       headers: {
         Authorization: `Bearer ${token}`,
-      },
-      params: {
-        id,
       },
     })
     .then((response) => response.data)

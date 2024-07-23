@@ -3,13 +3,22 @@ import { PlayerDtoPageResult } from "../../../api/dto/PlayersDtos/PlayerDtoPageR
 import { RootState } from "../store/store";
 import { fetchPlayersRequest } from "../../../api/requests/playerRequests/FetchPlayersRequest";
 
-export const fetchPlayers = createAsyncThunk<
+interface FetchPlayersParams {
+  name?: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export const fetchPlayersThunk = createAsyncThunk<
   PlayerDtoPageResult,
-  { name: string; page: number; pageSize: number },
+  FetchPlayersParams,
   { rejectValue: string; state: RootState }
 >(
   "players/fetchPlayers",
-  async ({ name, page, pageSize }, { rejectWithValue, getState }) => {
+  async (
+    { name = "", page = 1, pageSize = 6 } = {},
+    { rejectWithValue, getState }
+  ) => {
     const state = getState();
     const token = state.user.token;
 
@@ -21,7 +30,7 @@ export const fetchPlayers = createAsyncThunk<
       const response = await fetchPlayersRequest(name, page, pageSize, token);
       return response.data;
     } catch (error: any) {
-      return rejectWithValue(error.message || "Failed to fetch teams");
+      return rejectWithValue(error.message || "Failed to fetch players");
     }
   }
 );

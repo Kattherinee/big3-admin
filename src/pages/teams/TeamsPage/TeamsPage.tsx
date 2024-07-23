@@ -19,9 +19,9 @@ export const TeamsPage: React.FC = () => {
     dispatch(fetchTeams({ name: "", page: 1, pageSize: 6 }));
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(teams);
-  }, [teams]);
+  const handleCardClick = (id: number) => {
+    navigate(`/teams/${id}`);
+  };
 
   return (
     <>
@@ -41,7 +41,13 @@ export const TeamsPage: React.FC = () => {
           >
             {status === "loading" && <p>Loading...</p>}
             {status === "succeeded" &&
-              teams.map((team) => <TeamCard key={team.id} team={team} />)}
+              teams.map((team) => (
+                <TeamCard
+                  key={team.id}
+                  team={team}
+                  onClick={() => handleCardClick(team.id)}
+                />
+              ))}
             {status === "succeeded" && teams.length === 0 && (
               <div className={styles.emptyPage}>
                 <img

@@ -1,41 +1,112 @@
 .container {
-	display: flex;
+  display: flex;
 }
-
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 .main {
-	flex: 1;
-
+  flex: 1;
 }
 
 .head {
-	display: flex;
-	justify-content: space-between;
-	gap: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .cards {
-	margin: 25px 0;
+  margin: 25px 0;
 }
 
-@media (max-width: 767px) {
-
-	.sidebarPlaceholder {
-		width: 0;
-	}
-
-	.main {
-		padding: 0%;
-	}
-
-	.content {
-		margin-left: 0;
-	}
-
-	.head {
-		flex-direction: column;
-		align-items: center;
-		gap: 16px;
-	}
+.emptyPage {
+  background-color: var(--white);
+  width: 516px;
+  height: 530px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 15px;
+  justify-content: center;
 }
 
-@media (max-hight: 900px) {}
+.headText {
+  font-family: "Avenir-Black";
+  font-size: 36px;
+  color: var(--lightest-red);
+  margin-top: 48px;
+}
+
+.text {
+  font-family: "Avenir-Book";
+  font-size: 24px;
+  color: var(--grey);
+  margin-top: 24px;
+}
+
+@media (max-width: 1080px) {
+  .emptyPage {
+    height: 270px;
+    width: 470px;
+  }
+  .headText {
+    font-size: 30px;
+  }
+  .emptyPage img {
+    width: 359px;
+    height: 245px;
+  }
+  .text {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 756px) {
+  .empty {
+    align-items: baseline;
+  }
+  .sidebarPlaceholder {
+    width: 0;
+  }
+  .main {
+    padding: 0%;
+  }
+  .content {
+    margin-left: 0;
+  }
+  .head {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .empty {
+    justify-content: start;
+  }
+
+  .emptyPage {
+    height: 434px;
+    width: 100%;
+    border-radius: 0%;
+  }
+  .headText {
+    font-size: 18px;
+  }
+  .emptyPage img {
+    width: 225px;
+    height: 225px;
+  }
+  .text {
+    margin-top: 16px;
+    font-size: 15px;
+  }
+}

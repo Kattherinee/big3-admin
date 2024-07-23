@@ -15,6 +15,9 @@ const BreadCrumbs: React.FC = () => {
   const currentPlayer = useSelector(
     (state: RootState) => state.players.currentPlayer
   );
+  const currentTeam = useSelector(
+    (state: RootState) => state.teams.currentTeam
+  );
 
   return (
     <nav className={styles.breadcrumbs}>
@@ -28,8 +31,8 @@ const BreadCrumbs: React.FC = () => {
         if (basePath === "players" && !isNaN(Number(value)) && currentPlayer) {
           breadcrumbName = currentPlayer.name;
         }
-        if (basePath === "teams" && !isNaN(Number(value)) && currentPlayer) {
-          breadcrumbName = currentPlayer.name;
+        if (basePath === "teams" && !isNaN(Number(value)) && currentTeam) {
+          breadcrumbName = currentTeam.name;
         }
 
         return (

@@ -21,7 +21,7 @@ const PlayerDetailPage: React.FC = () => {
   }, [dispatch, id]);
 
   const handleEditClick = () => {
-    navigate(`/players/edit/${id}`);
+    navigate(`/players/update/${id}`);
   };
 
   const handleDeleteClick = async () => {

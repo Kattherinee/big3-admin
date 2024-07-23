@@ -6,7 +6,7 @@ import Button from "../../../ui/Button/Button";
 import { Select, SelectOption } from "../../../ui/Multiselect/Multiselect";
 import styles from "./PlayersPage.module.css";
 import PlayerCard from "../components/PlayerCard/PlayerCard";
-import { fetchPlayers } from "../../../core/redux/playersThunks/fetchPlayersThunk";
+import { fetchPlayersThunk } from "../../../core/redux/playersThunks/fetchPlayersThunk";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 
@@ -19,7 +19,7 @@ export const PlayersPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchPlayers({ name: "", page: 1, pageSize: 6 }));
+    dispatch(fetchPlayersThunk({ name: "", page: 1, pageSize: 6 }));
   }, [dispatch]);
 
   const [value, setValue] = useState<SelectOption[] | undefined>();
@@ -71,7 +71,7 @@ export const PlayersPage: React.FC = () => {
             {status === "succeeded" && players.length === 0 && (
               <div className={styles.emptyPage}>
                 <img
-                  src="/src/assets/images/emptyHere.png"
+                  src="/src/assets/images/emptyPlayers.png"
                   alt="Play BasketBall)"
                 />
                 <div className={styles.headText}>Empty here</div>

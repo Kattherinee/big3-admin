@@ -21,6 +21,7 @@
   border-radius: 4px 4px 0 0;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .logo {
@@ -44,4 +45,15 @@
 .year {
   font-size: 13px;
   color: var(--light-grey);
+}
+@media (max-height: 900px) {
+  .details {
+    padding: 15px 0;
+  }
+  .head {
+    height: 150px;
+  }
+  .card {
+    max-width: 327px;
+  }
 }

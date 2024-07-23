@@ -14,7 +14,6 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player, onClick }) => {
   const teamsLoading = useSelector(
     (state: RootState) => state.teams.status === "loading"
   );
-  const placeholderImage = "path/to/placeholder/image.png";
 
   const teamName = teamsLoading
     ? "Loading..."
@@ -24,7 +23,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player, onClick }) => {
     <div className={styles.card} onClick={onClick}>
       <div className={styles.head}>
         <img
-          src={player.avatarUrl || placeholderImage}
+          src={player.avatarUrl}
           alt="player's photo"
           className={styles.logo}
         />
