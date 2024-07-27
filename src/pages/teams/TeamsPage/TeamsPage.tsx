@@ -21,6 +21,7 @@ export const TeamsPage: React.FC = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     dispatch(fetchTeams({ name: "", page, pageSize }));
@@ -33,13 +34,21 @@ export const TeamsPage: React.FC = () => {
   const handlePageChange = ({ selected }: { selected: number }) => {
     setPage(selected + 1);
   };
-  const leftArrow = <img src="/src/assets/icon/chevron_left_24px.svg" alt="" />;
+
+  const leftArrow = (
+    <img src="/src/assets/icon/chevron_left_24px.svg" alt="Previous Page" />
+  );
   const rightArrow = (
-    <img src="/src/assets/icon/chevron_right_24px.svg" alt=">" />
+    <img src="/src/assets/icon/chevron_right_24px.svg" alt="Next Page" />
   );
 
   const handlePageSizeChange = (newPageSize: number) => {
     setPageSize(newPageSize);
+    setPage(1);
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query.toLowerCase().trim());
     setPage(1);
   };
 
@@ -49,12 +58,16 @@ export const TeamsPage: React.FC = () => {
     return styles.twentyfour;
   };
 
+  const filteredTeams = searchQuery
+    ? teams.filter((team) => team.name.toLowerCase().includes(searchQuery))
+    : teams;
+
   return (
     <>
       <div className={cn(styles.container)}>
         <main className={styles.main}>
           <div className={styles.head}>
-            <Search />
+            <Search onSearch={handleSearch} />
             <Button
               appearence="add"
               onClick={() => navigate("/teams/add_new_team")}
@@ -67,24 +80,21 @@ export const TeamsPage: React.FC = () => {
             className={cn(
               styles.cards,
               getGridStyle(),
-              teams.length === 0 ? styles.empty : ""
+              filteredTeams.length === 0 ? styles.empty : ""
             )}
           >
             {status === "loading" && <p>Loading...</p>}
             {status === "succeeded" &&
-              teams.map((team) => (
+              filteredTeams.map((team) => (
                 <TeamCard
                   key={team.id}
                   team={team}
                   onClick={() => handleCardClick(team.id)}
                 />
               ))}
-            {status === "succeeded" && teams.length === 0 && (
+            {status === "succeeded" && filteredTeams.length === 0 && (
               <div className={styles.emptyPage}>
-                <img
-                  src="/src/assets/images/emptyHere.png"
-                  alt="Play BasketBall)"
-                />
+                <img src="/src/assets/images/emptyHere.png" alt="Empty" />
                 <div className={styles.headText}>Empty here</div>
                 <div className={styles.text}>Add new teams to continue</div>
               </div>

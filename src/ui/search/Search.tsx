@@ -4,15 +4,14 @@ import cn from "classnames";
 import { SearchProps } from "./Search.props";
 
 const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
-  { className, ...props },
+  { className, onSearch, ...props },
   ref
 ) {
   const [query, setQuery] = useState("");
 
-  const handleSearch = () => {
-    if (query.trim()) {
-      console.log(`Searching for: ${query}`);
-    }
+  const handleSearch = (newQuery: string) => {
+    setQuery(newQuery);
+    onSearch(newQuery);
   };
 
   return (
@@ -23,14 +22,11 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
         type="text"
         placeholder="Search..."
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyPress={(e) => {
-          if (e.key === "Enter") handleSearch();
-        }}
+        onChange={(e) => handleSearch(e.target.value)}
         {...props}
       />
-      <span className={styles.searchIcon} onClick={handleSearch}>
-        <img src="src\assets\icon\search.svg" alt="" />
+      <span className={styles.searchIcon}>
+        <img src="src/assets/icon/search.svg" alt="Search" />
       </span>
     </div>
   );

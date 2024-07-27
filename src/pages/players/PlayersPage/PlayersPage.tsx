@@ -33,12 +33,14 @@ export const PlayersPage: React.FC = () => {
     navigate(`/players/${id}`);
   };
 
+  const handleSearchChange = (query: string) => {};
+
   return (
     <>
       <div className={cn(styles.container)}>
         <main className={styles.main}>
           <div className={styles.head}>
-            <Search />
+            <Search onSearch={handleSearchChange} />
             <Select
               multiple
               options={playerOptions}

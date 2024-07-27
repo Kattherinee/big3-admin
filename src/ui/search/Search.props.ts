@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from "react";
 
 export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
-  onSearch?: (query: string) => void;
+  onSearch: (query: string) => void;
 }
