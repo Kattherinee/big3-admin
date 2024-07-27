@@ -128,15 +128,18 @@ const PlayerForm: React.FC = () => {
       console.error("Failed to submit player:", error);
     }
   };
+  const formatOptionName = (str: string) => {
+    return str.split(" ").join(" ");
+  };
 
   const positionOptions: SelectOption[] = positions.map((position, index) => ({
     id: index,
-    name: position,
+    name: formatOptionName(position),
   }));
 
   const teamOptions: SelectOption[] = teams.map((team) => ({
     id: team.id,
-    name: team.name,
+    name: formatOptionName(team.name),
   }));
 
   if (currentPlayerStatus === "loading" && id) {
