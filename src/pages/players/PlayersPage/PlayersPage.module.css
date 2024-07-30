@@ -18,7 +18,29 @@
 }
 
 .cards {
+  display: grid;
+  gap: 20px;
   margin: 25px 0;
+}
+
+.cards.six {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  height: 784px;
+  width: 1140px;
+}
+
+.cards.twelve {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  height: 784px;
+  width: 1140px;
+}
+
+.cards.twentyfour {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  width: 1140px;
 }
 
 .emptyPage {
@@ -47,6 +69,43 @@
   margin-top: 24px;
 }
 
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 12px;
+  font-size: 14px;
+  margin: 0;
+}
+
+.pagination li {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--grey);
+}
+
+.pagination .active {
+  color: var(--white);
+  background-color: var(--red-default);
+}
+
+.pagination a {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 @media (max-width: 1080px) {
   .emptyPage {
     height: 270px;
@@ -61,6 +120,15 @@
   }
   .text {
     font-size: 20px;
+  }
+  .cards.six {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cards.twelve {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cards.twentyfour {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

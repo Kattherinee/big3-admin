@@ -7,8 +7,10 @@
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
+  width: 100%;
   max-width: 364px;
-  margin-bottom: 20px;
+  height: 100%;
+  max-height: 380px;
 }
 
 .card:hover {
@@ -17,49 +19,65 @@
 
 .head {
   background: linear-gradient(121.57deg, #707070 1.62%, #393939 81.02%);
-  height: 170px;
+  height: 100%;
   width: 100%;
   border-radius: 4px 4px 0 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
 }
 
 .logo {
-  width: 100%;
-  height: 140px;
-  object-fit: contain;
+  width: auto;
+  max-width: 274px;
+  height: 90%;
+  max-height: 207px;
   bottom: 0;
   position: absolute;
 }
 
 .details {
-  padding: 17px 0;
+  padding: 25px 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
 .name {
-  font-size: 17px;
+  font-size: 18px;
   color: var(--white);
 }
 
 .team {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--light-grey);
 }
 .number {
   color: var(--light-red);
 }
-@media (max-height: 900px) {
-  .details {
-    padding: 15px 0;
+@media (max-width: 1080px) {
+  .card {
+    width: 100%;
+    max-width: none;
   }
   .head {
     height: 150px;
   }
+  .details {
+    padding: 15px 0;
+  }
+}
+
+@media (max-width: 756px) {
   .card {
-    width: 327px;
+    width: 100%;
+    max-width: none;
+  }
+  .head {
+    height: 140px;
+  }
+  .details {
+    padding: 10px 0;
   }
 }
