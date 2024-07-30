@@ -1,11 +1,12 @@
 .searchContainer {
   display: flex;
   align-items: center;
+  height: 38.4px;
+  border: 0;
   border: 1px solid var(--lightest-grey);
   border-radius: 4px;
   width: 100%;
   max-width: 340px;
-  height: 40px;
   background-color: var(--white);
   padding: 0 12px;
 }
@@ -22,6 +23,7 @@
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  padding: 0;
 }
 
 .search::placeholder {

@@ -13,7 +13,9 @@ import { uploadImage } from "../../../../api/requests/uploadImageRequest";
 import Breadcrumbs from "../../../../components/BreadCrumbs/BreadCrumbs";
 import { addPlayerThunk } from "../../../../core/redux/playersThunks/addPlayerThunk";
 import { updatePlayerThunk } from "../../../../core/redux/playersThunks/updatePlayerThunk";
-import { Select, SelectOption } from "../../../../ui/Multiselect/Multiselect";
+import CustomSelect, {
+  SelectOption,
+} from "../../../../ui/Multiselect/Multiselect";
 import { getPositionsThunk } from "../../../../core/redux/playersThunks/getPositionsThunk";
 import { fetchTeams } from "../../../../core/redux/teamsThunks/fetchTeamsThunk";
 import { getPlayerThunk } from "../../../../core/redux/playersThunks/getPlayerThunk";
@@ -45,11 +47,6 @@ const PlayerForm: React.FC = () => {
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const [selectedPosition, setSelectedPosition] = useState<
-    SelectOption | undefined
-  >();
-  const [selectedTeam, setSelectedTeam] = useState<SelectOption | undefined>();
-
   const {
     register,
     handleSubmit,
@@ -72,18 +69,11 @@ const PlayerForm: React.FC = () => {
       setValue("name", currentPlayer.name);
       setValue("position", currentPlayer.position);
       setValue("team", currentPlayer.team);
-      setValue("birthday", formatDate(currentPlayer.birthday));
+      setValue("birthday", currentPlayer.birthday.split("T")[0]);
       setValue("height", currentPlayer.height);
       setValue("weight", currentPlayer.weight);
       setValue("num", currentPlayer.number);
       setAvatarUrl(currentPlayer.avatarUrl);
-
-      setSelectedPosition(
-        positionOptions.find((option) => option.name === currentPlayer.position)
-      );
-      setSelectedTeam(
-        teamOptions.find((option) => option.id === currentPlayer.team)
-      );
     }
   }, [currentPlayer, id, setValue]);
 
@@ -109,13 +99,12 @@ const PlayerForm: React.FC = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       const { num, ...rest } = data;
-
       const playerData = {
         ...rest,
         number: num,
         avatarUrl,
-        position: selectedPosition?.name || "",
-        team: selectedTeam?.id || 0,
+        position: data.position,
+        team: data.team,
       };
 
       if (id) {
@@ -128,6 +117,7 @@ const PlayerForm: React.FC = () => {
       console.error("Failed to submit player:", error);
     }
   };
+
   const formatOptionName = (str: string) => {
     return str.split(" ").join(" ");
   };
@@ -146,11 +136,6 @@ const PlayerForm: React.FC = () => {
     return <p>Loading...</p>;
   }
 
-  const formatDate = (dateString: string) => {
-    const [month, day, year] = dateString.split("-");
-    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-  };
-
   return (
     <>
       <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
@@ -164,7 +149,7 @@ const PlayerForm: React.FC = () => {
         <div className={styles["form-container"]}>
           <div className={styles.inputs}>
             <div className={styles.input}>
-              <label className={styles["label-iput"]} htmlFor="name">
+              <label className={styles["label-input"]} htmlFor="name">
                 Name
               </label>
               <InputField
@@ -185,14 +170,24 @@ const PlayerForm: React.FC = () => {
                 control={control}
                 rules={{ required: "Required" }}
                 render={({ field }) => (
-                  <Select
+                  <CustomSelect
+                    appearance="single"
                     options={positionOptions}
+                    value={
+                      field.value
+                        ? {
+                            id:
+                              positionOptions.find(
+                                (opt) => opt.name === field.value
+                              )?.id ?? 0,
+                            name: field.value,
+                          }
+                        : null
+                    }
+                    onChange={(val: SelectOption | null) =>
+                      field.onChange(val ? val.name : "")
+                    }
                     placeholder="Select..."
-                    value={selectedPosition}
-                    onChange={(option) => {
-                      field.onChange(option?.name);
-                      setSelectedPosition(option);
-                    }}
                   />
                 )}
               />
@@ -209,24 +204,34 @@ const PlayerForm: React.FC = () => {
                 control={control}
                 rules={{ required: "Required" }}
                 render={({ field }) => (
-                  <Select
+                  <CustomSelect
+                    appearance="single"
                     options={teamOptions}
-                    value={selectedTeam}
-                    placeholder="Select..."
-                    onChange={(option) => {
-                      field.onChange(option?.name);
-                      setSelectedTeam(option);
+                    value={
+                      field.value
+                        ? {
+                            id: field.value,
+                            name:
+                              teamOptions.find((opt) => opt.id === field.value)
+                                ?.name ?? "",
+                          }
+                        : null
+                    }
+                    onChange={(val: SelectOption | null) => {
+                      field.onChange(val ? val.id : 0);
                     }}
+                    placeholder="Select..."
                   />
                 )}
               />
+
               {errors.team && (
                 <p className={styles.error}>{errors.team.message}</p>
               )}
             </div>
             <div className={styles.shortContainer}>
               <div className={styles.inputShort}>
-                <label className={styles["label-iput"]} htmlFor="height">
+                <label className={styles["label-input"]} htmlFor="height">
                   Height (cm)
                 </label>
                 <InputField
@@ -242,7 +247,7 @@ const PlayerForm: React.FC = () => {
                 )}
               </div>
               <div className={styles.inputShort}>
-                <label className={styles["label-iput"]} htmlFor="weight">
+                <label className={styles["label-input"]} htmlFor="weight">
                   Weight (kg)
                 </label>
                 <InputField
@@ -274,7 +279,6 @@ const PlayerForm: React.FC = () => {
                   <p className={styles.error}>{errors.birthday.message}</p>
                 )}
               </div>
-
               <div className={styles.inputShort}>
                 <label className={styles["label-input"]} htmlFor="num">
                   Number

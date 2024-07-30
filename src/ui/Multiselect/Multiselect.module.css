@@ -1,121 +1,69 @@
-.container {
-  width: 364px;
-  height: 40px;
-  position: relative;
+.selectContainer .custom__control {
   border: 1px solid var(--lightest-grey);
   border-radius: 4px;
+  height: 40px;
+  display: flex;
+  align-items: center;
   background-color: var(--white);
-  display: flex;
-  align-items: center;
   font-family: "Avenir-Medium";
-}
-
-.value {
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  margin-left: 12px;
+  width: 366px;
   overflow: hidden;
-  white-space: nowrap;
 }
-.placeholder {
+
+.selectContainer .custom__placeholder {
   color: var(--grey);
-  font-size: 14px;
-  font-weight: 500;
-  margin-left: 2px;
 }
 
-.clear-btn {
-  background: none;
-  color: var(--lightest-grey);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 0;
-  font-size: 14px;
-}
-.clear-btn:focus,
-.clear-btn:hover {
-  color: var(--light-grey);
-}
-
-.option-card {
-  height: 23.5px;
-  width: fit-content;
+.selectContainer .custom__multi-value {
   background-color: var(--red-default);
   color: var(--white);
   border-radius: 4px;
-  padding: 0 5px;
-  margin-right: 8px;
-  font-family: "Avenir-Book";
-  font-size: 14px;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.option-card img {
-  margin-left: 8px;
-}
-
-.divider {
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
   height: 24px;
-  margin: 0 0 0 10px;
-  width: 0.5px;
-  background: var(--lightest-grey);
-  border: 0;
+}
+.selectContainer .custom__dropdown-indicator {
+  color: var(--grey);
+  cursor: pointer;
+  padding: 0 8px;
 }
 
-.caret {
-  padding-right: 16px;
-  padding-left: 12px;
-  margin: 0;
+.selectContainer .custom__multi-value__label {
+  color: var(--white);
 }
 
-.options {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: none;
-  border: 1px solid var(--lightest-grey);
-  border-radius: 4px;
-  width: 100%;
-  left: 0;
-  top: calc(100% + 3px);
-  background-color: var(--lightest-grey1);
+.selectContainer .custom__multi-value__remove {
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.selectContainer .custom__menu {
   z-index: 1000;
 }
-.options.show {
-  display: block;
-}
-.option {
-  padding: 8px 12px;
+
+.selectContainer .custom__option {
   cursor: pointer;
   color: var(--light-grey);
   border-bottom: 1px solid var(--lightest-grey);
 }
 
-.option.highlighted {
-  background-color: var(--light-red);
-  color: var(--white);
-}
-.option.selected {
+.selectContainer .custom__option--is-focused {
   background-color: var(--dark-red);
-  color: var(--white);
+  color: white;
 }
 
-.search::placeholder {
-  color: var(--grey);
+.selectContainer .custom__option--is-selected {
+  background-color: var(--dark-red);
+  color: white;
 }
-@media (max-width: 1080px) {
-  .container {
-    max-width: 340px;
-    height: 35px;
-  }
-}
-
 @media (max-width: 756px) {
-  .container {
-    width: 327px;
+  .selectContainer .custom__control {
+    width: 351px;
   }
 }

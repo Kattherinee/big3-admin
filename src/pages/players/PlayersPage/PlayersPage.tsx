@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../core/redux/store/store";
 import Search from "../../../ui/search/Search";
 import Button from "../../../ui/Button/Button";
-import { Select, SelectOption } from "../../../ui/Multiselect/Multiselect";
+import CustomSelect, {
+  SelectOption,
+} from "../../../ui/Multiselect/Multiselect";
 import styles from "./PlayersPage.module.css";
 import PlayerCard from "../components/PlayerCard/PlayerCard";
 import { fetchPlayersThunk } from "../../../core/redux/playersThunks/fetchPlayersThunk";
@@ -22,7 +24,7 @@ export const PlayersPage: React.FC = () => {
     dispatch(fetchPlayersThunk({ name: "", page: 1, pageSize: 6 }));
   }, [dispatch]);
 
-  const [value, setValue] = useState<SelectOption[] | undefined>();
+  const [value, setValue] = useState<SelectOption[]>([]);
 
   const playerOptions: SelectOption[] = players.map((player) => ({
     name: player.name,
@@ -36,54 +38,49 @@ export const PlayersPage: React.FC = () => {
   const handleSearchChange = (query: string) => {};
 
   return (
-    <>
-      <div className={cn(styles.container)}>
-        <main className={styles.main}>
-          <div className={styles.head}>
-            <Search onSearch={handleSearchChange} />
-            <Select
-              multiple
-              options={playerOptions}
-              value={value}
-              placeholder="Select..."
-              onChange={(o) => setValue(o)}
-            />
-            <Button
-              appearence="add"
-              onClick={() => navigate("/players/add_new_player")}
-            >
-              Add +
-            </Button>
-          </div>
-          <div
-            className={cn(
-              styles.cards,
-              players.length === 0 ? styles.empty : ""
-            )}
+    <div className={cn(styles.container)}>
+      <main className={styles.main}>
+        <div className={styles.head}>
+          <Search onSearch={handleSearchChange} />
+          <CustomSelect
+            appearance="multi"
+            options={playerOptions}
+            value={value}
+            placeholder="Select..."
+            onChange={setValue}
+          />
+          <Button
+            appearence="add"
+            onClick={() => navigate("/players/add_new_player")}
           >
-            {status === "loading" && <p>Loading...</p>}
-            {status === "succeeded" &&
-              players.map((player) => (
-                <PlayerCard
-                  key={player.id}
-                  player={player}
-                  onClick={() => handleCardClick(player.id)}
-                />
-              ))}
-            {status === "succeeded" && players.length === 0 && (
-              <div className={styles.emptyPage}>
-                <img
-                  src="/src/assets/images/emptyPlayers.png"
-                  alt="Play BasketBall)"
-                />
-                <div className={styles.headText}>Empty here</div>
-                <div className={styles.text}>Add new teams to continue</div>
-              </div>
-            )}
-            {status === "failed" && <p>Failed to load teams</p>}
-          </div>
-        </main>
-      </div>
-    </>
+            Add +
+          </Button>
+        </div>
+        <div
+          className={cn(styles.cards, players.length === 0 ? styles.empty : "")}
+        >
+          {status === "loading" && <p>Loading...</p>}
+          {status === "succeeded" &&
+            players.map((player) => (
+              <PlayerCard
+                key={player.id}
+                player={player}
+                onClick={() => handleCardClick(player.id)}
+              />
+            ))}
+          {status === "succeeded" && players.length === 0 && (
+            <div className={styles.emptyPage}>
+              <img
+                src="/src/assets/images/emptyPlayers.png"
+                alt="Play BasketBall)"
+              />
+              <div className={styles.headText}>Empty here</div>
+              <div className={styles.text}>Add new teams to continue</div>
+            </div>
+          )}
+          {status === "failed" && <p>Failed to load players</p>}
+        </div>
+      </main>
+    </div>
   );
 };

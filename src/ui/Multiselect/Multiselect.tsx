@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import Select, { StylesConfig, MultiValue, SingleValue } from "react-select";
 import styles from "./Multiselect.module.css";
-import cn from "classnames";
 
 export interface SelectOption {
   id: number;
@@ -8,167 +8,214 @@ export interface SelectOption {
 }
 
 interface MultiSelectProps {
-  multiple: true;
-  value?: SelectOption[];
+  appearance: "multi";
+  value: SelectOption[];
   onChange: (value: SelectOption[]) => void;
 }
 
 interface SingleSelectProps {
-  multiple?: false;
-  value?: SelectOption;
-  onChange: (value: SelectOption | undefined) => void;
+  appearance: "single";
+  value: SelectOption | null;
+  onChange: (value: SelectOption | null) => void;
 }
 
-type SelectProps = {
+type CustomSelectProps = {
   options: SelectOption[];
   placeholder?: string;
   error?: boolean;
 } & (MultiSelectProps | SingleSelectProps);
-
-export function Select({
-  multiple,
+const CustomSelect: React.FC<CustomSelectProps> = ({
+  appearance,
   value,
   onChange,
   options,
   placeholder,
-  error,
-}: SelectProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [highlightedIndex, setHighlightedIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const valueRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [currentWidth, setCurrentWidth] = useState(0);
+}) => {
   const [displayedValue, setDisplayedValue] = useState<SelectOption[]>([]);
 
-  function clearOptions() {
-    multiple ? onChange([]) : onChange(undefined);
-    setCurrentWidth(0);
-  }
-
-  function selectOption(option: SelectOption) {
-    if (multiple) {
-      const selectedValues = (value as SelectOption[]) || [];
-      if (selectedValues.includes(option)) {
-        onChange(selectedValues.filter((o) => o.id !== option.id));
-      } else {
-        onChange([...selectedValues, option]);
-      }
-    } else {
-      if (option !== value) onChange(option);
-    }
-  }
-
-  function isOptionSelected(option: SelectOption) {
-    return multiple ? value?.includes(option) : option === value;
-  }
-
   useEffect(() => {
-    if (isOpen) setHighlightedIndex(0);
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (multiple && value && containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
+    if (appearance === "multi" && value) {
       let width = 0;
       const newValue: SelectOption[] = [];
       let ellipsisAdded = false;
 
-      for (let i = 0; i < value.length; i++) {
-        const itemWidth = valueRefs.current[i]?.offsetWidth || 0;
-        if (width + itemWidth > containerWidth) {
-          if (!ellipsisAdded) {
-            newValue.push({ id: -1, name: "..." });
+      const selectedAreaWidth =
+        document.querySelector(".custom__value-container")?.clientWidth || 0;
+
+      value.forEach((val, index) => {
+        const itemWidth = getTextWidth(val.name, "14px Avenir-Book") + 30;
+        const ellipsisWidth = getTextWidth("...", "14px Avenir-Book") + 30;
+
+        if (width + itemWidth > selectedAreaWidth) {
+          if (!ellipsisAdded && width + ellipsisWidth <= selectedAreaWidth) {
+            newValue[newValue.length - 1] = { id: -1, name: "..." };
             ellipsisAdded = true;
           }
-          break;
+          return;
         } else {
-          newValue.push(value[i]);
-          width += itemWidth;
+          if (
+            width + itemWidth + ellipsisWidth > selectedAreaWidth &&
+            index === value.length - 1
+          ) {
+            newValue[newValue.length - 1] = { id: -1, name: "..." };
+          } else {
+            newValue.push(val);
+            width += itemWidth + 8;
+          }
         }
-      }
+      });
+
       setDisplayedValue(newValue);
-      setCurrentWidth(width);
     }
-  }, [value, multiple, currentWidth]);
+  }, [value, appearance]);
+
+  const handleChange = (
+    selected:
+      | MultiValue<{ value: number; label: string }>
+      | SingleValue<{ value: number; label: string }>
+  ) => {
+    if (appearance === "multi") {
+      onChange(
+        (selected as MultiValue<{ value: number; label: string }>).map(
+          (item) => ({
+            id: item.value,
+            name: item.label,
+          })
+        )
+      );
+    } else {
+      const selectedOption = selected as SingleValue<{
+        value: number;
+        label: string;
+      }>;
+      onChange(
+        selectedOption
+          ? { id: selectedOption.value, name: selectedOption.label }
+          : null
+      );
+    }
+  };
+
+  const formatOptions = options.map((option) => ({
+    value: option.id,
+    label: option.name,
+  }));
+
+  const customStyles: StylesConfig<{ value: number; label: string }, boolean> =
+    {
+      control: (base, state) => ({
+        ...base,
+        borderColor: "var(--lightest-grey)",
+        borderRadius: "4px",
+        boxShadow: state.isFocused ? "0px 0px 5px #d9d9d9" : "none",
+        "&:hover": {
+          boxShadow: "0px 0px 2px #d9d9d9",
+        },
+        height: "40px",
+        display: "flex",
+        alignItems: "center",
+        width: "366px",
+      }),
+      multiValue: (base) => ({
+        ...base,
+        backgroundColor: "var(--red-default)",
+        borderRadius: "4px",
+        display: "flex",
+        alignItems: "center",
+        marginRight: "4px",
+        height: "24px",
+      }),
+      multiValueLabel: (base) => ({
+        ...base,
+        color: "white",
+      }),
+      multiValueRemove: (base) => ({
+        ...base,
+        color: "white",
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "20px",
+        height: "20px",
+        "&:hover": {
+          color: " var(--lightest-grey)",
+          background: "none",
+        },
+      }),
+      dropdownIndicator: (base) => ({
+        ...base,
+        transform: "scale(0.8)",
+        color: "var(--lightest-grey)",
+        cursor: "pointer",
+        "&:hover": {
+          color: "var(--light-grey)",
+        },
+      }),
+      clearIndicator: (base) => ({
+        ...base,
+        color: "var(--lightest-grey)",
+        cursor: "pointer",
+        transform: "scale(0.8)",
+        "&:hover": {
+          color: "var(--light-grey)",
+        },
+      }),
+
+      menu: (base) => ({
+        ...base,
+        zIndex: 1000,
+      }),
+      option: (base, state) => ({
+        ...base,
+        borderBottom: "1px solid var(--lightest-grey)",
+        backgroundColor: state.isSelected
+          ? "var(--dark-red)"
+          : state.isFocused
+          ? "var(--dark-red)"
+          : "white",
+        color:
+          state.isSelected || state.isFocused ? "white" : "var(--light-grey)",
+        "&:active": {
+          backgroundColor: "var(--dark-red)",
+        },
+      }),
+    };
+
+  const getTextWidth = (text: string, font: string) => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    if (context) {
+      context.font = font;
+      return context.measureText(text).width;
+    }
+    return 0;
+  };
 
   return (
-    <div
-      onBlur={() => setIsOpen(false)}
-      onClick={() => setIsOpen((prev) => !prev)}
-      className={styles.container}
-    >
-      <span className={styles.value} ref={containerRef}>
-        {multiple ? (
-          displayedValue.length > 0 ? (
-            displayedValue.map((v, index) =>
-              v.id === -1 ? (
-                <div key="ellipsis" className={styles["option-card"]}>
-                  {v.name}
-                </div>
-              ) : (
-                <div
-                  key={v.id}
-                  ref={(el) => (valueRefs.current[index] = el)}
-                  onClick={(e) => {
-                    e.stopPropagation(), selectOption(v);
-                  }}
-                  className={styles["option-card"]}
-                >
-                  {v.name}
-                  <img
-                    src="/src/assets/icon/close_24px.svg"
-                    alt="&times;"
-                    className={styles["remove-btn"]}
-                  />
-                </div>
-              )
-            )
-          ) : (
-            <span className={styles.placeholder}>{placeholder}</span>
-          )
-        ) : (
-          value?.name || (
-            <span className={styles.placeholder}>{placeholder}</span>
-          )
-        )}
-      </span>
-
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          clearOptions();
-        }}
-        className={styles["clear-btn"]}
-      >
-        &times;
-      </button>
-
-      <div className={styles.divider}></div>
-      <div className={styles.caret}>
-        <img src="/src/assets/icon/expand_more_24px.svg" alt="▼" />
-      </div>
-
-      {isOpen && (
-        <ul className={cn(styles.options, isOpen ? styles.show : "")}>
-          {options.map((option, index) => (
-            <li
-              onClick={() => {
-                selectOption(option);
-                setIsOpen(false);
-              }}
-              onMouseEnter={() => setHighlightedIndex(index)}
-              key={option.id}
-              className={cn(
-                styles.option,
-                isOptionSelected(option) ? styles.selected : "",
-                index === highlightedIndex ? styles.highlighted : ""
-              )}
-            >
-              {option.name}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <Select
+      isMulti={appearance === "multi"}
+      value={
+        appearance === "multi"
+          ? displayedValue.map((val) => ({
+              value: val.id,
+              label: val.name,
+            }))
+          : value
+          ? {
+              value: (value as SelectOption).id,
+              label: (value as SelectOption).name,
+            }
+          : null
+      }
+      onChange={handleChange}
+      options={formatOptions}
+      placeholder={placeholder}
+      styles={customStyles}
+      className={styles.selectContainer}
+      classNamePrefix="custom"
+    />
   );
-}
+};
+
+export default CustomSelect;

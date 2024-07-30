@@ -9,7 +9,7 @@ interface TeamCardProps {
 }
 
 const TeamCard: React.FC<TeamCardProps> = ({ team, onClick }) => {
-  const placeholderImage = "path/to/placeholder/image.png"; // Укажите путь к placeholder изображению
+  const placeholderImage = "path/to/placeholder/image.png";
 
   return (
     <div className={styles.card} onClick={onClick}>
