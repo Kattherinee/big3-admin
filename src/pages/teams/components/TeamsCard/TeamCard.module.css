@@ -58,22 +58,20 @@
     max-width: none;
   }
   .head {
-    height: 150px;
-  }
-  .details {
-    padding: 15px 0;
+    height: 270px;
   }
 }
 
 @media (max-width: 756px) {
-  .card {
-    width: 100%;
-    max-width: none;
-  }
   .head {
-    height: 140px;
+    height: 107px;
   }
-  .details {
-    padding: 10px 0;
+
+  .name {
+    font-size: 15px;
+  }
+
+  .year {
+    font-size: 13px;
   }
 }

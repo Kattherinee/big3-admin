@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import ReactPaginate from "react-paginate";
 import PageSelect from "../../../ui/PageSelect/PageSelect";
+import { Spinner } from "../../../ui/Spinner/Spinner";
 
 export const TeamsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,8 +25,8 @@ export const TeamsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    dispatch(fetchTeams({ name: "", page, pageSize }));
-  }, [dispatch, page, pageSize]);
+    dispatch(fetchTeams({ name: searchQuery, page, pageSize }));
+  }, [dispatch, page, pageSize, searchQuery]);
 
   const handleCardClick = (id: number) => {
     navigate(`/teams/${id}`);
@@ -48,7 +49,7 @@ export const TeamsPage: React.FC = () => {
   };
 
   const handleSearch = (query: string) => {
-    setSearchQuery(query.toLowerCase().trim());
+    setSearchQuery(query.trim());
     setPage(1);
   };
 
@@ -58,74 +59,74 @@ export const TeamsPage: React.FC = () => {
     return styles.twentyfour;
   };
 
-  const filteredTeams = searchQuery
-    ? teams.filter((team) => team.name.toLowerCase().includes(searchQuery))
-    : teams;
+  const filteredTeams = teams.filter((team) => team.name.includes(searchQuery));
 
   return (
-    <>
-      <div className={cn(styles.container)}>
-        <main className={styles.main}>
-          <div className={styles.head}>
-            <Search onSearch={handleSearch} />
-            <Button
-              appearence="add"
-              onClick={() => navigate("/teams/add_new_team")}
-            >
-              Add +
-            </Button>
-          </div>
-
-          <div
-            className={cn(
-              styles.cards,
-              getGridStyle(),
-              filteredTeams.length === 0 ? styles.empty : ""
-            )}
+    <div className={cn(styles.container)}>
+      <main className={styles.main}>
+        <div className={styles.head}>
+          <Search onSearch={handleSearch} className={styles.search} />
+          <Button
+            appearence="add"
+            onClick={() => navigate("/teams/add_new_team")}
+            className={styles.button}
           >
-            {status === "loading" && <p>Loading...</p>}
-            {status === "succeeded" &&
-              filteredTeams.map((team) => (
-                <TeamCard
-                  key={team.id}
-                  team={team}
-                  onClick={() => handleCardClick(team.id)}
-                />
-              ))}
-            {status === "succeeded" && filteredTeams.length === 0 && (
-              <div className={styles.emptyPage}>
-                <img src="/src/assets/images/emptyHere.png" alt="Empty" />
-                <div className={styles.headText}>Empty here</div>
-                <div className={styles.text}>Add new teams to continue</div>
-              </div>
-            )}
-            {status === "failed" && <p>Failed to load teams</p>}
-          </div>
+            Add +
+          </Button>
+        </div>
 
-          <div className={styles["pagination-container"]}>
-            <ReactPaginate
-              previousLabel={leftArrow}
-              nextLabel={rightArrow}
-              breakLabel={"..."}
-              pageCount={Math.ceil(totalTeams / pageSize)}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageChange}
-              className={styles.pagination}
-              activeClassName={styles.active}
-            />
-            <div className={styles.controls}>
-              <label>
-                <PageSelect
-                  options={[6, 12, 24]}
-                  value={pageSize}
-                  onChange={handlePageSizeChange}
-                />
-              </label>
+        <div
+          className={cn(
+            styles.cards,
+            getGridStyle(),
+            filteredTeams.length === 0 ? styles.empty : ""
+          )}
+        >
+          {status === "loading" && <Spinner />}
+          {status === "succeeded" &&
+            filteredTeams.map((team) => (
+              <TeamCard
+                key={team.id}
+                team={team}
+                onClick={() => handleCardClick(team.id)}
+              />
+            ))}
+          {status === "succeeded" && filteredTeams.length === 0 && (
+            <div className={styles.emptyPage}>
+              <img src="/src/assets/images/emptyHere.png" alt="Empty" />
+              <div className={styles.headText}>Empty here</div>
+              <div className={styles.text}>Add new teams to continue</div>
             </div>
+          )}
+
+          {status === "failed" && (
+            <p className={styles.errorLoad}>Failed to load teams</p>
+          )}
+        </div>
+
+        <div className={styles["pagination-container"]}>
+          <ReactPaginate
+            previousLabel={leftArrow}
+            nextLabel={rightArrow}
+            breakLabel={"..."}
+            pageCount={Math.ceil(totalTeams / pageSize)}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageChange}
+            className={styles.pagination}
+            activeClassName={styles.active}
+          />
+          <div className={styles.controls}>
+            <label>
+              <PageSelect
+                options={[6, 12, 24]}
+                value={pageSize}
+                onChange={handlePageSizeChange}
+              />
+            </label>
           </div>
-        </main>
-      </div>
-    </>
+        </div>
+      </main>
+    </div>
   );
 };

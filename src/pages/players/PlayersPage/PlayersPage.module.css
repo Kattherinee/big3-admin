@@ -1,14 +1,14 @@
 .container {
   display: flex;
-}
-.empty {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   height: 100%;
 }
+
 .main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .head {
@@ -16,31 +16,50 @@
   justify-content: space-between;
   gap: 8px;
 }
+.filters {
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+  width: 100%;
+  max-width: 754px;
+}
 
 .cards {
   display: grid;
-  gap: 20px;
-  margin: 25px 0;
+  gap: 24px;
+  margin-top: 25px;
+  justify-items: center;
+  flex: 1;
 }
 
 .cards.six {
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  height: 784px;
-  width: 1140px;
+
+  grid-auto-rows: 380px;
+}
+
+.cards.six .card {
+  max-width: 364px;
+  height: 380px;
 }
 
 .cards.twelve {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  height: 784px;
-  width: 1140px;
+  gap: 18px;
 }
 
 .cards.twentyfour {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 1140px;
+  gap: 18px;
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .emptyPage {
@@ -74,6 +93,8 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 32px;
+  bottom: 0;
+  flex-shrink: 0;
 }
 
 .pagination {
@@ -102,21 +123,35 @@
 }
 
 .pagination a {
-  padding: 5px 10px;
   cursor: pointer;
+}
+.spinner {
+  margin-top: 50px;
+}
+.errorContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.errorLoad {
+  color: var(--red-default);
+  font-family: "Avenir-Book";
+  font-size: 20px;
+  margin-top: 50px;
 }
 
 @media (max-width: 1080px) {
   .emptyPage {
-    height: 270px;
-    width: 470px;
+    height: 474px;
+    width: 453px;
   }
   .headText {
     font-size: 30px;
   }
   .emptyPage img {
-    width: 359px;
-    height: 245px;
+    width: 225px;
+    height: 225px;
   }
   .text {
     font-size: 20px;
@@ -133,48 +168,90 @@
 }
 
 @media (max-width: 756px) {
-  .empty {
-    align-items: baseline;
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  .sidebarPlaceholder {
-    width: 0;
-  }
+
   .main {
-    padding: 0%;
+    width: 100%;
+    width: calc(100% - 24px);
   }
-  .content {
-    margin-left: 0;
+  .button {
+    width: 351px;
   }
+
   .head {
     flex-direction: column;
     align-items: center;
     gap: 16px;
   }
-  .cards {
-    display: flex;
+  .filters {
     flex-direction: column;
-    justify-content: center;
+    gap: 16px;
     align-items: center;
-    width: 100%;
+  }
+
+  .cards {
+    display: grid;
+    gap: 12px;
+    justify-items: center;
+
+    margin: 16px 0;
+  }
+  .cards.six {
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .cards.six,
+  .cards.twelve,
+  .cards.twentyfour {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 201px;
+  }
+  .cards .card {
+    height: 201px;
   }
   .empty {
-    justify-content: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 
   .emptyPage {
     height: 434px;
     width: 100%;
-    border-radius: 0%;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
   }
+
   .headText {
     font-size: 18px;
+    color: var(--lightest-red);
   }
-  .emptyPage img {
-    width: 225px;
-    height: 225px;
-  }
+
   .text {
     margin-top: 16px;
     font-size: 15px;
+    color: var(--grey);
+  }
+
+  .pagination {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+  }
+
+  .pagination li {
+    height: 28px;
+    width: 28px;
   }
 }

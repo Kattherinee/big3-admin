@@ -5,7 +5,7 @@ import Search from "../../../ui/search/Search";
 import Button from "../../../ui/Button/Button";
 import CustomSelect, {
   SelectOption,
-} from "../../../ui/Multiselect/Multiselect";
+} from "../../../ui/Multiselect/CustomSelect";
 import styles from "./PlayersPage.module.css";
 import PlayerCard from "../components/PlayerCard/PlayerCard";
 import { fetchPlayersThunk } from "../../../core/redux/playersThunks/fetchPlayersThunk";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import ReactPaginate from "react-paginate";
 import PageSelect from "../../../ui/PageSelect/PageSelect";
+import { Spinner } from "../../../ui/Spinner/Spinner";
 
 export const PlayersPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -53,7 +54,7 @@ export const PlayersPage: React.FC = () => {
   };
 
   const handleSearch = (query: string) => {
-    setSearchQuery(query.toLowerCase().trim());
+    setSearchQuery(query.trim());
     setPage(1);
   };
 
@@ -68,10 +69,10 @@ export const PlayersPage: React.FC = () => {
   );
 
   return (
-    <>
-      <div className={cn(styles.container)}>
-        <main className={styles.main}>
-          <div className={styles.head}>
+    <div className={cn(styles.container)}>
+      <main className={styles.main}>
+        <div className={styles.head}>
+          <div className={styles.filters}>
             <Search onSearch={handleSearch} />
             <CustomSelect
               appearance="multi"
@@ -80,77 +81,80 @@ export const PlayersPage: React.FC = () => {
               placeholder="Select..."
               onChange={setValue}
             />
-            <Button
-              appearence="add"
-              onClick={() => navigate("/players/add_new_player")}
-            >
-              Add +
-            </Button>
           </div>
-
-          <div
-            className={cn(
-              styles.cards,
-              getGridStyle(),
-              filteredPlayers.length === 0 ? styles.empty : ""
-            )}
+          <Button
+            appearence="add"
+            onClick={() => navigate("/players/add_new_player")}
+            className={styles.button}
           >
-            {playersStatus === "loading" && <p>Loading...</p>}
-            {playersStatus === "succeeded" &&
-              filteredPlayers.map((player) => (
-                <PlayerCard
-                  key={player.id}
-                  player={player}
-                  onClick={() => handleCardClick(player.id)}
-                />
-              ))}
-            {playersStatus === "succeeded" && filteredPlayers.length === 0 && (
-              <div className={styles.emptyPage}>
-                <img
-                  src="/src/assets/images/emptyPlayers.png"
-                  alt="Play BasketBall"
-                />
-                <div className={styles.headText}>Empty here</div>
-                <div className={styles.text}>Add new teams to continue</div>
-              </div>
-            )}
-            {playersStatus === "failed" && <p>Failed to load players</p>}
-          </div>
+            Add +
+          </Button>
+        </div>
 
-          <div className={styles["pagination-container"]}>
-            <ReactPaginate
-              previousLabel={
-                <img
-                  src="/src/assets/icon/chevron_left_24px.svg"
-                  alt="Previous Page"
-                />
-              }
-              nextLabel={
-                <img
-                  src="/src/assets/icon/chevron_right_24px.svg"
-                  alt="Next Page"
-                />
-              }
-              breakLabel={"..."}
-              pageCount={Math.ceil(totalPlayers / pageSize)}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageChange}
-              className={styles.pagination}
-              activeClassName={styles.active}
-            />
-            <div className={styles.controls}>
-              <label>
-                <PageSelect
-                  options={[6, 12, 24]}
-                  value={pageSize}
-                  onChange={handlePageSizeChange}
-                />
-              </label>
+        <div
+          className={cn(
+            styles.cards,
+            getGridStyle(),
+            filteredPlayers.length === 0 ? styles.empty : ""
+          )}
+        >
+          {playersStatus === "loading" && <Spinner />}
+          {playersStatus === "succeeded" &&
+            filteredPlayers.map((player) => (
+              <PlayerCard
+                key={player.id}
+                player={player}
+                onClick={() => handleCardClick(player.id)}
+              />
+            ))}
+          {playersStatus === "succeeded" && filteredPlayers.length === 0 && (
+            <div className={styles.emptyPage}>
+              <img
+                src="/src/assets/images/emptyPlayers.png"
+                alt="Play BasketBall"
+              />
+              <div className={styles.headText}>Empty here</div>
+              <div className={styles.text}>Add new players to continue</div>
             </div>
+          )}
+          {playersStatus === "failed" && (
+            <p className={styles.errorLoad}>Failed to load players</p>
+          )}
+        </div>
+
+        <div className={styles["pagination-container"]}>
+          <ReactPaginate
+            previousLabel={
+              <img
+                src="/src/assets/icon/chevron_left_24px.svg"
+                alt="Previous Page"
+              />
+            }
+            nextLabel={
+              <img
+                src="/src/assets/icon/chevron_right_24px.svg"
+                alt="Next Page"
+              />
+            }
+            breakLabel={"..."}
+            pageCount={Math.ceil(totalPlayers / pageSize)}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageChange}
+            className={styles.pagination}
+            activeClassName={styles.active}
+          />
+          <div className={styles.controls}>
+            <label>
+              <PageSelect
+                options={[6, 12, 24]}
+                value={pageSize}
+                onChange={handlePageSizeChange}
+              />
+            </label>
           </div>
-        </main>
-      </div>
-    </>
+        </div>
+      </main>
+    </div>
   );
 };

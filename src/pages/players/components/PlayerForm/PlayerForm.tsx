@@ -15,7 +15,7 @@ import { addPlayerThunk } from "../../../../core/redux/playersThunks/addPlayerTh
 import { updatePlayerThunk } from "../../../../core/redux/playersThunks/updatePlayerThunk";
 import CustomSelect, {
   SelectOption,
-} from "../../../../ui/Multiselect/Multiselect";
+} from "../../../../ui/Multiselect/CustomSelect";
 import { getPositionsThunk } from "../../../../core/redux/playersThunks/getPositionsThunk";
 import { fetchTeams } from "../../../../core/redux/teamsThunks/fetchTeamsThunk";
 import { getPlayerThunk } from "../../../../core/redux/playersThunks/getPlayerThunk";
@@ -118,18 +118,14 @@ const PlayerForm: React.FC = () => {
     }
   };
 
-  const formatOptionName = (str: string) => {
-    return str.split(" ").join(" ");
-  };
-
   const positionOptions: SelectOption[] = positions.map((position, index) => ({
     id: index,
-    name: formatOptionName(position),
+    name: position,
   }));
 
   const teamOptions: SelectOption[] = teams.map((team) => ({
     id: team.id,
-    name: formatOptionName(team.name),
+    name: team.name,
   }));
 
   if (currentPlayerStatus === "loading" && id) {

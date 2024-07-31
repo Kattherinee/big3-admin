@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Select, { StylesConfig, MultiValue, SingleValue } from "react-select";
-import styles from "./Multiselect.module.css";
 
 export interface SelectOption {
   id: number;
@@ -24,6 +23,7 @@ type CustomSelectProps = {
   placeholder?: string;
   error?: boolean;
 } & (MultiSelectProps | SingleSelectProps);
+
 const CustomSelect: React.FC<CustomSelectProps> = ({
   appearance,
   value,
@@ -114,7 +114,21 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         height: "40px",
         display: "flex",
         alignItems: "center",
-        width: "366px",
+
+        width: "364px",
+
+        overflow: "hidden",
+        fontFamily: "Avenir-Medium",
+        "@media only screen and (max-width: 756px)": {
+          width: "351px",
+        },
+      }),
+      placeholder: (base) => ({
+        ...base,
+        color: "var(--grey)",
+        "@media only screen and (max-width: 756px)": {
+          fontSize: "15px",
+        },
       }),
       multiValue: (base) => ({
         ...base,
@@ -151,6 +165,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         "&:hover": {
           color: "var(--light-grey)",
         },
+        padding: "0 8px",
       }),
       clearIndicator: (base) => ({
         ...base,
@@ -161,7 +176,6 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
           color: "var(--light-grey)",
         },
       }),
-
       menu: (base) => ({
         ...base,
         zIndex: 1000,
@@ -212,7 +226,6 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       options={formatOptions}
       placeholder={placeholder}
       styles={customStyles}
-      className={styles.selectContainer}
       classNamePrefix="custom"
     />
   );

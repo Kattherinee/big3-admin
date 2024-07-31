@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getTeamThunk } from "../../core/redux/teamsThunks/getTeamThunk";
 import { deleteTeamThunk } from "../../core/redux/teamsThunks/deleteTeamThunk";
+import { Spinner } from "../../ui/Spinner/Spinner";
 
 const TeamInfoDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -50,8 +51,16 @@ const TeamInfoDetail: React.FC = () => {
           />
         </div>
       </div>
-      {currentTeamStatus === "loading" && <p>Loading...</p>}
-      {currentTeamStatus === "failed" && <p>Error: {currentTeamError}</p>}
+      {currentTeamStatus === "loading" && (
+        <div className={styles.spinner}>
+          <Spinner />
+        </div>
+      )}
+      {currentTeamStatus === "failed" && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errors}>Error: {currentTeamError}</p>
+        </div>
+      )}
       {currentTeamStatus === "succeeded" && currentTeam && (
         <div className={styles.details}>
           <div className={styles.avatarContainer}>

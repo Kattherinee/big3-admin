@@ -139,6 +139,9 @@ const Header: React.FC = () => {
           <span>Sign out</span>
         </Link>
       </div>
+      {hamburgerOpen && (
+        <div className={styles.overlay} onClick={closeHamburger}></div>
+      )}
     </>
   );
 };

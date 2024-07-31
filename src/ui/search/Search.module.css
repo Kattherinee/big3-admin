@@ -51,23 +51,14 @@
   color: var(--lightest-grey);
 }
 
-@media (max-width: 1080px) {
-  .searchContainer {
-    height: 35px;
-  }
-
-  .searchIcon {
-    font-size: 1em;
-  }
-}
-
 @media (max-width: 767px) {
   .searchContainer {
     width: 100%;
-    max-width: 303px;
-    height: 35px;
+    max-width: 326px;
   }
-
+  .search::placeholder {
+    font-size: 15px;
+  }
   .searchIcon {
     font-size: 1.25em;
   }

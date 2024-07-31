@@ -1,8 +1,6 @@
 .button {
   cursor: pointer;
-
   border-radius: 4px;
-
   font-family: "Avenir-Medium";
   font-size: 15px;
   font-weight: 500;
@@ -63,7 +61,6 @@
 
 @media (max-width: 1080px) {
   .add {
-    height: 36px;
     min-width: 70px;
   }
   .signIn {

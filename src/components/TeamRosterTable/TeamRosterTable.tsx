@@ -22,11 +22,19 @@ const TeamRosterTable: React.FC<TeamRosterTableProps> = ({ teamId }) => {
   const teamPlayers = players.filter((player) => player.team === teamId);
 
   if (playersStatus === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.loading}>Loading...</div>
+      </div>
+    );
   }
 
   if (playersStatus === "failed") {
-    return <div>Error loading players</div>;
+    return (
+      <div className={styles.errorContainer}>
+        <div className={styles.error}>Error loading players</div>
+      </div>
+    );
   }
   return (
     <div className={styles.tableContainer}>

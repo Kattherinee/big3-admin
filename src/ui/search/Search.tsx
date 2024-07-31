@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useState, useEffect } from "react";
 import styles from "./Search.module.css";
 import cn from "classnames";
 import { SearchProps } from "./Search.props";
@@ -9,9 +9,12 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
 ) {
   const [query, setQuery] = useState("");
 
+  useEffect(() => {
+    onSearch(query);
+  }, [query, onSearch]);
+
   const handleSearch = (newQuery: string) => {
     setQuery(newQuery);
-    onSearch(newQuery);
   };
 
   return (
@@ -26,7 +29,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
         {...props}
       />
       <span className={styles.searchIcon}>
-        <img src="src/assets/icon/search.svg" alt="Search" />
+        <img src="/src/assets/icon/search.svg" alt="Search" />
       </span>
     </div>
   );

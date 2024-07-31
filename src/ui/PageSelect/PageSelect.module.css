@@ -5,16 +5,20 @@
 
 .custom-select {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 88px;
   height: 40px;
   background-color: white;
-  border: 1px solid var(--lightest-grey);
+  border: 0.5px solid var(--lightest-grey);
   border-radius: 4px;
 }
-.select-value {
-  padding: 0 20px;
+.value-container {
+  width: 52px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .divider {
@@ -28,14 +32,14 @@
 .custom-select img {
   width: 11px;
   height: auto;
-  padding-right: 17px;
 }
 
 .select-options {
   position: absolute;
   bottom: 100%;
   left: 0;
-  width: 100%;
+  width: 88px;
+  height: 120px;
   border: 1px solid var(--lightest-grey);
   border-radius: 4px;
   background-color: white;
@@ -56,4 +60,31 @@
 
 .select-options div:hover {
   background-color: #f0f0f0;
+}
+
+@media (max-width: 756px) {
+  .custom-select {
+    width: 60px;
+    height: 28px;
+  }
+  .value-container {
+    width: 36px;
+    height: 28px;
+  }
+
+  .divider {
+    margin-right: 8px;
+    width: 0.3px;
+  }
+  .custom-select img {
+    width: 8px;
+  }
+  .select-options {
+    margin-bottom: 4px;
+    width: 60px;
+    height: 106px;
+  }
+  .select-options div {
+    padding: 6px 16px;
+  }
 }

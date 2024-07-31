@@ -1,4 +1,3 @@
-// TeamCard.tsx
 import React from "react";
 import styles from "./TeamCard.module.css";
 import { TeamDto } from "../../../../api/dto/TeamsDtos/TeamDto";

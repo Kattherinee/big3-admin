@@ -10,6 +10,17 @@
   font-size: 18px;
   color: var(--grey);
 }
+.errorContainer,
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error {
+  color: var(--dark-red);
+  font-size: 17px;
+}
 
 .table {
   width: 100%;

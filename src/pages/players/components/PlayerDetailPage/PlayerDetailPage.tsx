@@ -6,6 +6,7 @@ import { getPlayerThunk } from "../../../../core/redux/playersThunks/getPlayerTh
 import { deletePlayerThunk } from "../../../../core/redux/playersThunks/deletePlayerThunk";
 import styles from "./PlayerDetailPage.module.css";
 import BreadCrumbs from "../../../../components/BreadCrumbs/BreadCrumbs";
+import { Spinner } from "../../../../ui/Spinner/Spinner";
 
 const PlayerDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -65,8 +66,16 @@ const PlayerDetailPage: React.FC = () => {
           />
         </div>
       </div>
-      {currentPlayerStatus === "loading" && <p>Loading...</p>}
-      {currentPlayerStatus === "failed" && <p>Error: {currentPlayerError}</p>}
+      {currentPlayerStatus === "loading" && (
+        <div className={styles.spinner}>
+          <Spinner />
+        </div>
+      )}
+      {currentPlayerStatus === "failed" && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errors}>Error: {currentPlayerError}</p>
+        </div>
+      )}
       {currentPlayerStatus === "succeeded" && currentPlayer && (
         <div className={styles.details}>
           <div className={styles.avatarContainer}>

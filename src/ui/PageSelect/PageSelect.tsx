@@ -26,7 +26,9 @@ const PageSelect: React.FC<CustomSelectProps> = ({
   return (
     <div className={styles["select-container"]} onClick={handleToggle}>
       <div className={styles["custom-select"]}>
-        <div className={styles["select-value"]}> {value}</div>
+        <div className={styles["value-container"]}>
+          <div className={styles["select-value"]}> {value}</div>
+        </div>
         <div className={styles.divider}></div>
         <img src="/src/assets/icon/expand_more_24px.svg" alt="" />
       </div>
