@@ -2,6 +2,7 @@ import styles from "./SignUpPage.module.css";
 import React from "react";
 import AuthForm from "../components/AuthForm/AuthForm";
 import { Link } from "react-router-dom";
+import signup from "/src/assets/images/sighUp.png";
 
 export const SignUpPage: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ export const SignUpPage: React.FC = () => {
         </p>
       </div>
       <div className={styles["img-section"]}>
-        <img src="/src/assets/images/sighUp.png" alt="111" />
+        <img src={signup} alt="111" />
       </div>
     </div>
   );

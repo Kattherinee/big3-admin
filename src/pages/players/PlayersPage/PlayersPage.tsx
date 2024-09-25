@@ -15,6 +15,9 @@ import cn from "classnames";
 import ReactPaginate from "react-paginate";
 import PageSelect from "../../../ui/PageSelect/PageSelect";
 import { Spinner } from "../../../ui/Spinner/Spinner";
+import left from "/src/assets/icon/chevron_left_24px.svg";
+import right from "/src/assets/icon/chevron_right_24px.svg";
+import empty from "/src/assets/images/emptyPlayers.png";
 
 export const PlayersPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -109,10 +112,7 @@ export const PlayersPage: React.FC = () => {
             ))}
           {playersStatus === "succeeded" && filteredPlayers.length === 0 && (
             <div className={styles.emptyPage}>
-              <img
-                src="/src/assets/images/emptyPlayers.png"
-                alt="Play BasketBall"
-              />
+              <img src={empty} alt="Play BasketBall" />
               <div className={styles.headText}>Empty here</div>
               <div className={styles.text}>Add new players to continue</div>
             </div>
@@ -124,18 +124,8 @@ export const PlayersPage: React.FC = () => {
 
         <div className={styles["pagination-container"]}>
           <ReactPaginate
-            previousLabel={
-              <img
-                src="/src/assets/icon/chevron_left_24px.svg"
-                alt="Previous Page"
-              />
-            }
-            nextLabel={
-              <img
-                src="/src/assets/icon/chevron_right_24px.svg"
-                alt="Next Page"
-              />
-            }
+            previousLabel={<img src={left} alt="Previous Page" />}
+            nextLabel={<img src={right} alt="Next Page" />}
             breakLabel={"..."}
             pageCount={Math.ceil(totalPlayers / pageSize)}
             marginPagesDisplayed={2}

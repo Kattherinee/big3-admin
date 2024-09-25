@@ -84,6 +84,7 @@ const PlayerForm: React.FC = () => {
       const file = event.target.files[0];
       setSelectedFile(file);
       setIsUploading(true);
+      console.log(selectedFile);
 
       try {
         const avatarUrl = await uploadImage(file, token);

@@ -2,6 +2,7 @@ import { forwardRef, useState, useEffect } from "react";
 import styles from "./Search.module.css";
 import cn from "classnames";
 import { SearchProps } from "./Search.props";
+import searchh from "/src/assets/icon/search.svg";
 
 const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
   { className, onSearch, ...props },
@@ -29,7 +30,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
         {...props}
       />
       <span className={styles.searchIcon}>
-        <img src="/src/assets/icon/search.svg" alt="Search" />
+        <img src={searchh} alt="Search" />
       </span>
     </div>
   );

@@ -7,6 +7,8 @@ import { deletePlayerThunk } from "../../../../core/redux/playersThunks/deletePl
 import styles from "./PlayerDetailPage.module.css";
 import BreadCrumbs from "../../../../components/BreadCrumbs/BreadCrumbs";
 import { Spinner } from "../../../../ui/Spinner/Spinner";
+import edit from "/src/assets/icon/create.svg";
+import remove from "/src/assets/icon/delete.svg";
 
 const PlayerDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -54,16 +56,8 @@ const PlayerDetailPage: React.FC = () => {
           <BreadCrumbs />
         </div>
         <div className={styles.icons}>
-          <img
-            src="/src/assets/icon/create.svg"
-            alt="Edit"
-            onClick={handleEditClick}
-          />
-          <img
-            src="/src/assets/icon/delete.svg"
-            alt="Delete"
-            onClick={handleDeleteClick}
-          />
+          <img src={edit} alt="Edit" onClick={handleEditClick} />
+          <img src={remove} alt="Delete" onClick={handleDeleteClick} />
         </div>
       </div>
       {currentPlayerStatus === "loading" && (

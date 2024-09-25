@@ -1,7 +1,7 @@
 import styles from "./Checkbox.module.css";
 import cn from "classnames";
 import { forwardRef } from "react";
-
+import okk from "/src/assets/icon/ok.svg";
 interface CheckboxProps {
   label: string;
   disabled?: boolean;
@@ -35,7 +35,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             error ? styles.errorCustom : ""
           )}
         >
-          <img src="/src/assets/icon/ok.svg" alt="✔" />
+          <img src={okk} alt="✔" />
         </span>
         <span
           className={cn(

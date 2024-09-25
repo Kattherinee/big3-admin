@@ -11,6 +11,9 @@ import cn from "classnames";
 import ReactPaginate from "react-paginate";
 import PageSelect from "../../../ui/PageSelect/PageSelect";
 import { Spinner } from "../../../ui/Spinner/Spinner";
+import left from "/src/assets/icon/chevron_left_24px.svg";
+import right from "/src/assets/icon/chevron_right_24px.svg";
+import empty from "/src/assets/images/emptyHere.png";
 
 export const TeamsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -36,12 +39,8 @@ export const TeamsPage: React.FC = () => {
     setPage(selected + 1);
   };
 
-  const leftArrow = (
-    <img src="/src/assets/icon/chevron_left_24px.svg" alt="Previous Page" />
-  );
-  const rightArrow = (
-    <img src="/src/assets/icon/chevron_right_24px.svg" alt="Next Page" />
-  );
+  const leftArrow = <img src={left} alt="Previous Page" />;
+  const rightArrow = <img src={right} alt="Next Page" />;
 
   const handlePageSizeChange = (newPageSize: number) => {
     setPageSize(newPageSize);
@@ -93,7 +92,7 @@ export const TeamsPage: React.FC = () => {
             ))}
           {status === "succeeded" && filteredTeams.length === 0 && (
             <div className={styles.emptyPage}>
-              <img src="/src/assets/images/emptyHere.png" alt="Empty" />
+              <img src={empty} alt="Empty" />
               <div className={styles.headText}>Empty here</div>
               <div className={styles.text}>Add new teams to continue</div>
             </div>

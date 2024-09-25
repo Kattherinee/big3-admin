@@ -67,6 +67,7 @@ const TeamForm: React.FC = () => {
       const file = event.target.files[0];
       setSelectedFile(file);
       setIsUploading(true);
+      console.log(selectedFile);
 
       try {
         const imageUrl = await uploadImage(file, token);

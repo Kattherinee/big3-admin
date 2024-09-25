@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { getTeamThunk } from "../../core/redux/teamsThunks/getTeamThunk";
 import { deleteTeamThunk } from "../../core/redux/teamsThunks/deleteTeamThunk";
 import { Spinner } from "../../ui/Spinner/Spinner";
+import create from "/src/assets/icon/create.svg";
+import remove from "/src/assets/icon/delete.svg";
 
 const TeamInfoDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,16 +41,8 @@ const TeamInfoDetail: React.FC = () => {
           <BreadCrumbs />
         </div>
         <div className={styles.icons}>
-          <img
-            src="/src/assets/icon/create.svg"
-            alt="Edit"
-            onClick={handleEditClick}
-          />
-          <img
-            src="/src/assets/icon/delete.svg"
-            alt="Delete"
-            onClick={handleDeleteClick}
-          />
+          <img src={create} alt="Edit" onClick={handleEditClick} />
+          <img src={remove} alt="Delete" onClick={handleDeleteClick} />
         </div>
       </div>
       {currentTeamStatus === "loading" && (

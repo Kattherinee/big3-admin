@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { updateUserProfile } from "../../../api/requests/userRequests/UpdateProfileRequest";
+
 import { RootState } from "../store/store";
 
 export const updateProfile = createAsyncThunk(
@@ -16,8 +16,6 @@ export const updateProfile = createAsyncThunk(
     }
 
     try {
-      const response = await updateUserProfile(params, token);
-
       return {
         userName: params.userName,
         avatarUrl: params.avatarUrl,

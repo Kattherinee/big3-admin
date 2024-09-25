@@ -1,5 +1,6 @@
 import styles from "./PageSelect.module.css";
 import { useState } from "react";
+import more from "/src/assets/icon/expand_more_24px.svg";
 
 interface CustomSelectProps {
   options: number[];
@@ -30,7 +31,7 @@ const PageSelect: React.FC<CustomSelectProps> = ({
           <div className={styles["select-value"]}> {value}</div>
         </div>
         <div className={styles.divider}></div>
-        <img src="/src/assets/icon/expand_more_24px.svg" alt="" />
+        <img src={more} alt="" />
       </div>
       {isOpen && (
         <div className={styles["select-options"]}>

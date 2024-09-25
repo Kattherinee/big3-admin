@@ -1,5 +1,7 @@
 import React, { ChangeEvent } from "react";
 import styles from "./ImageUpload.module.css";
+import photoinst from "/src/assets/images/Rectangle 207.png";
+import addd from "/src/assets/icon/add_a_photo.svg";
 
 interface ImageUploadProps {
   avatarUrl: string;
@@ -14,7 +16,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     <div className={styles["avatar-cover"]}>
       <label htmlFor="avatarUpload" className={styles.avatar}>
         <img
-          src={photoUrl || "/src/assets/images/Rectangle 207.png"}
+          src={photoUrl || photoinst}
           alt="Avatar Preview"
           className={styles.avatar}
         />
@@ -26,7 +28,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           onChange={onChange}
         />
         <div className={styles.avatarOverlay}>
-          <img src="/src/assets/icon/add_a_photo.svg" alt="+" />
+          <img src={addd} alt="+" />
         </div>
       </label>
     </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AuthForm from "../components/AuthForm/AuthForm";
 import styles from "./LogInPage.module.css";
+import login from "/src/assets/images/logIn.png";
 
 export const LogInPage: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ export const LogInPage: React.FC = () => {
         </p>
       </div>
       <div className={styles["img-section"]}>
-        <img src="/src/assets/images/logIn.png" alt="111" />
+        <img src={login} alt="111" />
       </div>
     </div>
   );

@@ -8,6 +8,10 @@ import {
   selectUser,
   userActions,
 } from "../../core/redux/store/slices/user.slice";
+import hamburgerIcon from "/src/assets/icon/hamburger.svg";
+import logo from "/src/assets/images/logo.png";
+import loogOut from "/src/assets/icon/logOut_red.svg";
+import avatarr from "/src/assets/icon/profile.svg";
 
 const Header: React.FC = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState<boolean>(false);
@@ -35,17 +39,13 @@ const Header: React.FC = () => {
     <>
       <header className={styles.header}>
         <img
-          src="/src/assets/icon/hamburger.svg"
+          src={hamburgerIcon}
           alt="Hamburger"
           className={styles.hamburger}
           onClick={toggleHamburger}
         />
 
-        <img
-          src="/src/assets/images/logo.png"
-          alt="logo"
-          className={styles.logo}
-        />
+        <img src={logo} alt="logo" className={styles.logo} />
 
         <div onClick={() => navigate("/editProfile")} className={styles.user}>
           <span>{userName}</span>
@@ -65,10 +65,7 @@ const Header: React.FC = () => {
       >
         <div className={styles.userSidebar} onClick={handleUserClick}>
           <div className={styles.avatarFit}>
-            <img
-              src={avatarUrl || "/src/assets/icon/profile.svg"}
-              alt="User Avatar"
-            />
+            <img src={avatarUrl || avatarr} alt="User Avatar" />
           </div>
           <span>{userName}</span>
         </div>
@@ -135,7 +132,7 @@ const Header: React.FC = () => {
           className={cn(styles.link, styles.logOut)}
           onClick={logOut}
         >
-          <img src="/src/assets/icon/logOut_red.svg" alt="" />
+          <img src={loogOut} alt="" />
           <span>Sign out</span>
         </Link>
       </div>
